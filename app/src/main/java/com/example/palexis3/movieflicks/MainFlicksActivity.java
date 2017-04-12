@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.example.palexis3.movieflicks.Models.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -11,9 +12,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import cz.msebera.android.httpclient.Header;
 
 public class MainFlicksActivity extends AppCompatActivity {
+
+    ArrayList<Movie> movieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +37,8 @@ public class MainFlicksActivity extends AppCompatActivity {
                 JSONArray movieJSONResults = null;
                 try {
                     movieJSONResults = response.getJSONArray("results");
-                    Log.d("DEBUG", movieJSONResults.toString());
+                    movieList = Movie.fromJSONArray(movieJSONResults);
+                    Log.d("DEBUG", movieList.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
