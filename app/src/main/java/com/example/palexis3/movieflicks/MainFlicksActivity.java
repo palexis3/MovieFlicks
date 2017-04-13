@@ -20,6 +20,8 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainFlicksActivity extends AppCompatActivity {
 
+    private final String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=f1e55cc01616b64d1b66566ca00d707a";
+
     ArrayList<Movie> movieList;
     MovieArrayAdapter movieAdapter;
     ListView lvItems;
@@ -40,7 +42,6 @@ public class MainFlicksActivity extends AppCompatActivity {
         //setting movie adapter
         lvItems.setAdapter(movieAdapter);
 
-        String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=f1e55cc01616b64d1b66566ca00d707a";
 
         AsyncHttpClient client = new AsyncHttpClient();
 
