@@ -16,13 +16,23 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import static com.example.palexis3.movieflicks.R.id.tvOverView;
+import static com.example.palexis3.movieflicks.R.id.tvTitle;
+
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
-    public MovieArrayAdapter(Context context, List<Movie> movies) {
-        super(context, android.R.layout.simple_list_item_1, movies);
+    // view holder cache class
+    private static class ViewHolder {
+        TextView title;
+        TextView overView;
+        ImageView image;
     }
 
-    // override arrayAdapter getview to populate movie items
+    public MovieArrayAdapter(Context context, List<Movie> movies) {
+        super(context, R.layout.item_movie, movies);
+    }
+
+    // override arrayAdapter getView to populate movie items
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -30,27 +40,38 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         // get the data item for this position
         Movie movie = getItem(position);
 
+        ViewHolder viewHolder;
+
         // check to see if the existing view is being reused
         if(convertView == null) {
+
+            // no view to reuse, so create a brand new view for row
+            viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.item_movie, parent, false);
+
+            // find specific views
+            viewHolder.title = (TextView) convertView.findViewById(tvTitle);
+            viewHolder.overView = (TextView) convertView.findViewById(tvOverView);
+            viewHolder.image = (ImageView) convertView.findViewById(R.id.ivMovieImage);
+
+            // cache the viewholder object within the view
+            convertView.setTag(viewHolder);
+            
+        } else {
+            // there is an existing view to be recycled
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        // find the image view
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.ivMovieImage);
-
         // clear out image view
-        imageView.setImageResource(0);
-
-        TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-        TextView tvOverView = (TextView) convertView.findViewById(R.id.tvOverView);
+        viewHolder.image.setImageResource(0);
 
         // populate the text views
-        tvTitle.setText(movie.getOriginalTitle());
-        tvOverView.setText(movie.getOverView());
+        viewHolder.title.setText(movie.getOriginalTitle());
+        viewHolder.overView.setText(movie.getOverView());
 
         // populate image using picasso
-        Picasso.with(getContext()).load(movie.getPosterPath()).into(imageView);
+        Picasso.with(getContext()).load(movie.getPosterPath()).into(viewHolder.image);
 
         // return the view
         return convertView;
