@@ -57,7 +57,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
             // cache the viewholder object within the view
             convertView.setTag(viewHolder);
-            
+
         } else {
             // there is an existing view to be recycled
             viewHolder = (ViewHolder) convertView.getTag();
