@@ -3,7 +3,9 @@ package com.example.palexis3.movieflicks;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ListView;
 
+import com.example.palexis3.movieflicks.Adapters.MovieArrayAdapter;
 import com.example.palexis3.movieflicks.Models.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -19,17 +21,30 @@ import cz.msebera.android.httpclient.Header;
 public class MainFlicksActivity extends AppCompatActivity {
 
     ArrayList<Movie> movieList;
+    MovieArrayAdapter movieAdapter;
+    ListView lvItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_flicks);
 
+        // instantiating list view
+        lvItems = (ListView) findViewById(R.id.lvMovies);
+
+        movieList = new ArrayList<>();
+
+        //instantiating movie array adapter
+        movieAdapter = new MovieArrayAdapter(this, movieList);
+
+        //setting movie adapter
+        lvItems.setAdapter(movieAdapter);
+
         String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=f1e55cc01616b64d1b66566ca00d707a";
 
         AsyncHttpClient client = new AsyncHttpClient();
 
-        //make a client request
+        // making an asynchronous http request
         client.get(url, new JsonHttpResponseHandler() {
 
             @Override
@@ -37,7 +52,8 @@ public class MainFlicksActivity extends AppCompatActivity {
                 JSONArray movieJSONResults = null;
                 try {
                     movieJSONResults = response.getJSONArray("results");
-                    movieList = Movie.fromJSONArray(movieJSONResults);
+                    movieList.addAll(Movie.fromJSONArray(movieJSONResults));
+                    movieAdapter.notifyDataSetChanged();
                     Log.d("DEBUG", movieList.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
