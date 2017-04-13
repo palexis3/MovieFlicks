@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.palexis3.movieflicks.Models.Movie;
 import com.example.palexis3.movieflicks.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         super(context, android.R.layout.simple_list_item_1, movies);
     }
 
+    // override arrayAdapter getview to populate movie items
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -47,7 +49,10 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         tvTitle.setText(movie.getOriginalTitle());
         tvOverView.setText(movie.getOverView());
 
-        //return the view
+        // populate image using picasso
+        Picasso.with(getContext()).load(movie.getPosterPath()).into(imageView);
+
+        // return the view
         return convertView;
     }
 }
