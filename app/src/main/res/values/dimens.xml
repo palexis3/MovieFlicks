@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="textview_width">550dp</dimen>
+
+    <dimen name="image_width_land">180dp</dimen>
+    <dimen name="image_height_land">100dp</dimen>
+
+    <dimen name="image_width_portrait">200dp</dimen>
+    <dimen name="image_height_portrait">200dp</dimen>
+
+    <dimen name="tv_margin_left">8dp</dimen>
+    <dimen name="title_margin_above">4dp</dimen>
 </resources>

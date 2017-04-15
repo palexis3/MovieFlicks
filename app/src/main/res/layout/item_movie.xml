@@ -6,8 +6,10 @@
 
     <ImageView
         android:id="@+id/ivMovieImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/image_width_portrait"
+        android:layout_height="@dimen/image_height_portrait"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -15,20 +17,25 @@
 
     <TextView
         android:id="@+id/tvTitle"
+        android:textColor="@color/colorAccent"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/tv_margin_left"
         android:layout_toRightOf="@+id/ivMovieImage"
+        android:layout_marginBottom="@dimen/title_margin_above"
         tools:text="Kong: Skull Island" />
 
     <TextView
         android:id="@+id/tvOverView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_toRightOf="@+id/ivMovieImage"
         android:layout_toEndOf="@+id/ivMovieImage"
         android:layout_below="@+id/tvTitle"
+        android:layout_marginLeft="@dimen/tv_margin_left"
         tools:text="Explore the mysterious and dangerous home of the king of the apes as a team of explorers ventures deep inside the treacherous, primordial island." />
 
 </RelativeLayout>
