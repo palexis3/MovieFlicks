@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.palexis3.movieflicks.Adapters.MovieArrayAdapter;
 import com.example.palexis3.movieflicks.Models.Movie;
@@ -63,6 +64,7 @@ public class MainFlicksActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Toast.makeText(MainFlicksActivity.this, "Could not successfully make an http request to Movie DB!", Toast.LENGTH_LONG).show();
                 super.onFailure(statusCode, headers, throwable, errorResponse);
             }
         });
