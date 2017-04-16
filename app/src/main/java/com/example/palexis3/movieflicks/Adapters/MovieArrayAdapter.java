@@ -36,6 +36,23 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         this.context = context;
     }
 
+  /*
+    @Override
+    public int getViewTypeCount() {
+        // Returns the number of types of Views that will be created by this adapter
+        // Each type represents a set of views that can be converted
+    }
+
+
+    // Get the type of View that will be created by getView(int, View, ViewGroup)
+    // for the specified item.
+    @Override
+    public int getItemViewType(int position) {
+        // Return an integer here representing the type of View.
+        // Note: Integers must be in the range 0 to getViewTypeCount() - 1
+    }
+  */
+
     // override arrayAdapter getView to populate movie items
     @NonNull
     @Override
