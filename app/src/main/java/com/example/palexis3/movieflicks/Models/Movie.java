@@ -12,6 +12,7 @@ public class Movie {
     String originalTitle;
     String overView;
     String backdropPath;
+    int rating;
 
     public String getPosterPath() {
         return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
@@ -29,11 +30,16 @@ public class Movie {
         return overView;
     }
 
+    public int getRating() {
+        return rating;
+    }
+
     public Movie(JSONObject jsonObject) throws JSONException {
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overView = jsonObject.getString("overview");
         this.backdropPath = jsonObject.getString("backdrop_path");
+        this.rating = jsonObject.getInt("vote_average");
     }
 
     // factory method takes in a json array to then create a list of movie objects
