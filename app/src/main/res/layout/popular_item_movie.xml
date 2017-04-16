@@ -23,8 +23,8 @@
             android:layout_width="@dimen/play_icon_width"
             android:layout_height="@dimen/play_icon_height"
             app:srcCompat="@drawable/play_icon"
-            android:alpha="0.2"
             android:scaleType="fitXY"
+            android:alpha="0.7"
             android:layout_centerVertical="true"
             android:layout_centerInParent="true"/>
 
