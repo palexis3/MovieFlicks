@@ -13,4 +13,7 @@
     <dimen name="title_margin_above">4dp</dimen>
     <dimen name="image_margin_top">8dp</dimen>
 
+    <dimen name="play_icon_height">80dp</dimen>
+    <dimen name="play_icon_width">80dp</dimen>
+
 </resources>

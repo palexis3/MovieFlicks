@@ -17,9 +17,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static com.example.palexis3.movieflicks.R.id.tvOverView;
-import static com.example.palexis3.movieflicks.R.id.tvTitle;
-
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
     private final static int AVERAGE_MOVIE = 0;
@@ -38,7 +35,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
     }
 
     public MovieArrayAdapter(Context context, List<Movie> movies) {
-        super(context, R.layout.item_movie, movies);
+        super(context, 0, movies);
         this.context = context;
         this.movies = movies;
     }
@@ -76,9 +73,6 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        // get the data item for this position
-        Movie movie = getItem(position);
-
         // holds the view type
         int viewType = 0;
 
@@ -103,6 +97,9 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
             // there is an existing view to be recycled
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
+        // get the data item for this position
+        final Movie movie = getItem(position);
 
         // get the current orientation to determine the appropriate image
         int orientation = context.getResources().getConfiguration().orientation;
