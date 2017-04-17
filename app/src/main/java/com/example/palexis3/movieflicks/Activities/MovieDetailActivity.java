@@ -51,7 +51,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvOverView.setText(movie.getOverView());
 
         // load image with picasso
-        Picasso.with(MovieDetailActivity.this).load(movie.getBackdropPath()).transform(new RoundedCornersTransformation(10,10)).into(ivMovie);
+        Picasso.with(MovieDetailActivity.this).load(movie.getBackdropPath()).transform(new RoundedCornersTransformation(7,7)).into(ivMovie);
 
         // listener waits for the image to be clicked to launch youtube player
         imageViewListener();
