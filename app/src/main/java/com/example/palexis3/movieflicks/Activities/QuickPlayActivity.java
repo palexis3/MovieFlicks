@@ -10,7 +10,13 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class QuickPlayActivity extends YouTubeBaseActivity{
+
+    // using Butterknife for binding youtubePlayerView
+    @BindView(R.id.yvPlayer)  YouTubePlayerView youTubePlayerView;
 
     private final static String YOUTUBE_API_KEY = "AIzaSyCnfTbICoDrNz_ESkwiF2caf1H7lbEh7fI";
     private String key;
@@ -19,11 +25,10 @@ public class QuickPlayActivity extends YouTubeBaseActivity{
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_quick_play);
+        ButterKnife.bind(this);
 
+        // getting youtube key from intent
         key = getIntent().getStringExtra("key");
-
-        // get youtube player
-        YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.yvPlayer);
 
         // call youtube player
         youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener(){
