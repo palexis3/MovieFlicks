@@ -65,6 +65,7 @@
         android:layout_marginTop="4dp"
         android:layout_toRightOf="@id/tvReleaseDateString"
         android:layout_toEndOf="@id/tvReleaseDateString"
+        android:layout_marginLeft="@dimen/tv_margin_left"
         android:text="TextView" />
 
     <RatingBar
