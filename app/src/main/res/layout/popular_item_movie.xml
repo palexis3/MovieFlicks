@@ -5,7 +5,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/image_height_portrait">
+        android:layout_height="@dimen/image_height_portrait"
+        android:layout_marginRight="@dimen/tv_margin_left">
 
         <ImageView
             android:id="@+id/ivPopularMovieImage"

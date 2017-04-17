@@ -18,6 +18,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
     private final static int AVERAGE_MOVIE = 0;
@@ -130,7 +132,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
                 imagePath = (orientation == Configuration.ORIENTATION_PORTRAIT) ?  movie.getPosterPath() : movie.getBackdropPath();
 
                 // populate image using picasso
-                Picasso.with(getContext()).load(imagePath).into(holderAverage.image);
+                Picasso.with(getContext()).load(imagePath).transform(new RoundedCornersTransformation(10, 10)).into(holderAverage.image);
 
                 // return created view
                 return v;
@@ -161,7 +163,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
                 //clear out image view
                 viewHolderPopular.popularImage.setImageResource(0);
 
-                Picasso.with(getContext()).load(imagePath).into(viewHolderPopular.popularImage);
+                Picasso.with(getContext()).load(imagePath).transform(new RoundedCornersTransformation(10, 10)).into(viewHolderPopular.popularImage);
 
                 return v;
 
