@@ -15,31 +15,30 @@ import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
-    ImageView ivMovie;
-    TextView tvTitle;
-    TextView tvReleaseDate;
-    TextView tvOverView;
-    String key;
+    // setting up butterknife binding
+    @BindView(R.id.ivMovieDetailImage) ImageView ivMovie;
+    @BindView(R.id.tvMovieDetailTitle) TextView tvTitle;
+    @BindView(R.id.tvMovieDetailReleaseDate) TextView tvReleaseDate;
+    @BindView(R.id.tvMovieDetailOverview) TextView tvOverView;
+
+    private String key;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
+        ButterKnife.bind(this);
 
         //get the movie passed in from the intent
         Movie movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra("movie"));
         key = getIntent().getStringExtra("key");
-
-        // initialize all of the views
-        ivMovie = (ImageView) findViewById(R.id.ivMovieDetailImage);
-        tvTitle = (TextView) findViewById(R.id.tvMovieDetailTitle);
-        tvReleaseDate = (TextView) findViewById(R.id.tvMovieDetailReleaseDate);
-        tvOverView = (TextView) findViewById(R.id.tvMovieDetailOverview);
 
         // parsing release date from movie
         String[] arr = movie.getReleaseDate().split("-");
