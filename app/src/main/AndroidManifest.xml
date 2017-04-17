@@ -21,10 +21,7 @@
 
         <activity android:name=".Activities.MovieDetailActivity"></activity>
 
-        <activity
-            android:name=".Activities.QuickPlayActivity"
-            android:screenOrientation="landscape">
-        </activity>
+        <activity android:name=".Activities.QuickPlayActivity"></activity>
 
     </application>
 
