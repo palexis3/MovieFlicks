@@ -2,18 +2,34 @@
 <resources>
 
     <dimen name="textview_width">540dp</dimen>
+    <dimen name="tv_item_width">170dp</dimen>
 
+    <!-- image width and height landscape dimensions -->
     <dimen name="image_width_land">180dp</dimen>
     <dimen name="image_height_land">100dp</dimen>
 
+    <!-- image width and height portrait dimensions -->
     <dimen name="image_width_portrait">180dp</dimen>
     <dimen name="image_height_portrait">200dp</dimen>
 
+    <!-- margins for views within main/detail flicks activity -->
     <dimen name="tv_margin_left">8dp</dimen>
     <dimen name="title_margin_above">4dp</dimen>
     <dimen name="image_margin_top">8dp</dimen>
 
+    <!-- play icon width and height -->
     <dimen name="play_icon_height">80dp</dimen>
     <dimen name="play_icon_width">80dp</dimen>
+
+    <!-- movie detail activity dimensions -->
+    <dimen name="image_movie_detail_portrait_height">190dp</dimen>
+    <dimen name="tv_movie_detail_overview_margin_top">16dp</dimen>
+    <dimen name="rating_margin_left">13dp</dimen>
+    <dimen name="tv_movie_detail_title_margin_top">8dp</dimen>
+
+    <!-- Rating star dimensions -->
+    <dimen name="rating_star_width">90dp</dimen>
+    <dimen name="rating_star_height">15dp</dimen>
+
 
 </resources>

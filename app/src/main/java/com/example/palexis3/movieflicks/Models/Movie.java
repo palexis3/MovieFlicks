@@ -3,16 +3,20 @@ package com.example.palexis3.movieflicks.Models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 
+@Parcel
 public class Movie {
 
     String posterPath;
     String originalTitle;
     String overView;
     String backdropPath;
+    String releaseDate;
     int rating;
+    int id;
 
     public String getPosterPath() {
         return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
@@ -34,12 +38,21 @@ public class Movie {
         return rating;
     }
 
+    public int getId() { return id; }
+
+    public String getReleaseDate() { return releaseDate; }
+
+    /// empty constructor needed by the Parceler library
+    public Movie() {}
+
     public Movie(JSONObject jsonObject) throws JSONException {
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overView = jsonObject.getString("overview");
         this.backdropPath = jsonObject.getString("backdrop_path");
         this.rating = jsonObject.getInt("vote_average");
+        this.id = jsonObject.getInt("id");
+        this.releaseDate = jsonObject.getString("release_date");
     }
 
     // factory method takes in a json array to then create a list of movie objects

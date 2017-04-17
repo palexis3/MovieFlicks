@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.palexis3.movieflicks.Activities.MovieDetailActivity"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <RelativeLayout
+        android:id="@+id/rlMovieDetail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_movie_detail_portrait_height">
+
+
+        <ImageView
+            android:id="@+id/ivMovieDetailImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_movie_detail_portrait_height"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="@dimen/image_margin_top"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <ImageView
+            android:id="@+id/ivPlayIcon"
+            android:layout_width="@dimen/play_icon_width"
+            android:layout_height="@dimen/play_icon_height"
+            app:srcCompat="@drawable/play_icon"
+            android:scaleType="fitXY"
+            android:alpha="0.6"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvMovieDetailTitle"
+        android:textColor="@color/colorAccent"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlMovieDetail"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_movie_detail_title_margin_top"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/tvReleaseDateString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_below="@id/tvMovieDetailTitle"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginTop="4dp"
+        android:text="Release Date:"/>
+
+    <TextView
+        android:id="@+id/tvMovieDetailReleaseDate"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMovieDetailTitle"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@id/tvReleaseDateString"
+        android:layout_toEndOf="@id/tvReleaseDateString"
+        android:text="TextView" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="@dimen/rating_star_width"
+        android:layout_height="@dimen/rating_star_height"
+        android:layout_below="@id/tvMovieDetailReleaseDate"
+        android:layout_marginLeft="@dimen/rating_margin_left" />
+
+    <TextView
+        android:id="@+id/tvMovieDetailOverview"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ratingBar"
+        android:layout_marginTop="@dimen/tv_movie_detail_overview_margin_top"
+        android:scrollbars="vertical"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        tools:text="This is the overview of the movie!" />
+
+</RelativeLayout>

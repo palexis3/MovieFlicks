@@ -20,7 +20,7 @@
         android:id="@+id/tvTitle"
         android:textColor="@color/colorAccent"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/tv_item_width"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/tv_margin_left"
@@ -31,7 +31,7 @@
     <TextView
         android:id="@+id/tvOverView"
         android:textColor="@color/white"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/tv_item_width"
         android:layout_height="match_parent"
         android:layout_toRightOf="@+id/ivMovieImage"
         android:layout_toEndOf="@+id/ivMovieImage"
