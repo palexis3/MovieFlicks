@@ -26,7 +26,8 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainFlicksActivity extends AppCompatActivity {
 
-    private final String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=f1e55cc01616b64d1b66566ca00d707a";
+    private final static String API_KEY = "f1e55cc01616b64d1b66566ca00d707a";
+    private final String url = String.format("https://api.themoviedb.org/3/movie/now_playing?api_key=%s", API_KEY);
 
     ArrayList<Movie> movieList;
     MovieArrayAdapter movieAdapter;
@@ -83,17 +84,56 @@ public class MainFlicksActivity extends AppCompatActivity {
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Movie movie = movieList.get(position); // get the clicked item
 
-                // launch youtube client since this is a popular movie
-                if(movie.getRating() > 5) {
-                    Toast.makeText(MainFlicksActivity.this, "Just clicked a popular movie", Toast.LENGTH_SHORT).show();
-                } else {
-                    // launch the movie details activity for unpopular movies
-                    Intent i = new Intent(MainFlicksActivity.this, MovieDetailActivity.class);
-                    i.putExtra("movie", Parcels.wrap(movie));
-                    startActivity(i);
-                }
+                final Movie movie = movieList.get(position); // get the clicked item
+
+                String video_url = String.format("https://api.themoviedb.org/3/movie/%s/videos?api_key=%s", movie.getId(), API_KEY);
+
+                // get trailer key for specific movie
+                AsyncHttpClient client = new AsyncHttpClient();
+
+
+                client.get(video_url, new JsonHttpResponseHandler(){
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                        String key = null;
+
+                        try{
+                            // getting the key for youtube player for a movie
+                            key = response.getJSONArray("results").getJSONObject(0).getString("key");
+                        } catch(Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        if(key == null) {
+                            Toast.makeText(MainFlicksActivity.this, "Error: Could not get key for YouTube player", Toast.LENGTH_LONG).show();
+                            throw new RuntimeException("Error: Could not get key for YouTube player");
+                        }
+
+                        // launch youtube client since this is a popular movie
+                        if(movie.getRating() > 5) {
+                            Intent i = new Intent(MainFlicksActivity.this, QuickPlayActivity.class);
+                            i.putExtra("key", key);
+                            i.putExtra("id", movie.getId());
+                            startActivity(i);
+
+                        } else {
+                            // launch the movie details activity for unpopular movies
+                            Intent i = new Intent(MainFlicksActivity.this, MovieDetailActivity.class);
+                            i.putExtra("movie", Parcels.wrap(movie));
+                            i.putExtra("key", key);
+                            startActivity(i);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Toast.makeText(MainFlicksActivity.this, "Could not get youtube key for specific movie", Toast.LENGTH_LONG).show();
+                        super.onFailure(statusCode, headers, responseString, throwable);
+                    }
+                });
             }
         });
     }

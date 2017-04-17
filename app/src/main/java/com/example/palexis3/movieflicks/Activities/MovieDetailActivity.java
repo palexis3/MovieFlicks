@@ -1,9 +1,11 @@
 package com.example.palexis3.movieflicks.Activities;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     TextView tvTitle;
     TextView tvReleaseDate;
     TextView tvOverView;
+    String key;
 
 
     @Override
@@ -28,6 +31,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         //get the movie passed in from the intent
         Movie movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra("movie"));
+        key = getIntent().getStringExtra("key");
 
         // initialize all of the views
         ivMovie = (ImageView) findViewById(R.id.ivMovieDetailImage);
@@ -47,5 +51,19 @@ public class MovieDetailActivity extends AppCompatActivity {
         // load image with picasso
         Picasso.with(MovieDetailActivity.this).load(movie.getBackdropPath()).into(ivMovie);
 
+        // listener waits for the image to be clicked to launch youtube player
+        imageViewListener();
+    }
+
+    private void imageViewListener() {
+        ivMovie.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // start the youtube viewer intent
+                Intent i = new Intent(MovieDetailActivity.this, QuickPlayActivity.class);
+                i.putExtra("key", key);
+                startActivity(i);
+            }
+        });
     }
 }
