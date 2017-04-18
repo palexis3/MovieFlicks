@@ -31,22 +31,19 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
     private Context context; // used to determine current activity
     private List<Movie> movies; // get list of all movies
 
-    // view holder cache class for average movies (using Butterknife for view binding)
-    static class ViewHolderAverage {
-        @BindView(R.id.tvTitle) TextView title;
-        @BindView(R.id.tvOverView) TextView overView;
-        @BindView(R.id.ivMovieImage) ImageView image;
 
-        public ViewHolderAverage(View v) {
-            ButterKnife.bind(this, v);
-        }
-    }
+    // view holder cache for movies (using butterknife for view binding)
+    /**
+     * Nullable annotation is used for the case when dealing with popular and average movies,
+       some items will be null in both cases
+    */
+    static class MovieViewHolder {
+        @Nullable @BindView(R.id.tvTitle) TextView title;
+        @Nullable @BindView(R.id.tvOverView) TextView overView;
+        @Nullable @BindView(R.id.ivMovieImage) ImageView image;
+        @Nullable @BindView(R.id.ivPopularMovieImage) ImageView popularImage;
 
-    // view holder cache class for popular movies (using Butterknife for view binding)
-    static class ViewHolderPopular {
-        @BindView(R.id.ivPopularMovieImage) ImageView popularImage;
-
-        public ViewHolderPopular(View v) {
+        public MovieViewHolder(View v) {
             ButterKnife.bind(this, v);
         }
     }
@@ -101,76 +98,59 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         String imagePath;
 
         // will hold parent view
-        View v = convertView;;
+        View v = convertView;
 
-        // use a switch statement to determine the two types of movies based on ratings:
+        // view holder object
+        MovieViewHolder movieViewHolder;
+
+        if(v == null) {
+            // get the inflated view type
+            v = getInflatedLayoutForType(viewType);
+
+            // no view to reuse, so create a brand new view for row
+            movieViewHolder = new MovieViewHolder(v);
+
+            // cached view holder object within parent view
+            v.setTag(movieViewHolder);
+
+        } else {
+            // get the cached view holder object
+            movieViewHolder = (MovieViewHolder) v.getTag();
+        }
+
+        // use a switch statement to populate relevant movie info based on ratings:
         // average and popular
         switch(viewType) {
 
             case AVERAGE_MOVIE:
 
-                ViewHolderAverage holderAverage;
-
-                if(v == null) {
-
-                    // get the inflated layout for average movies
-                    v = getInflatedLayoutForType(viewType);
-
-                    // no view to reuse, so create a brand new view for row
-                    holderAverage = new ViewHolderAverage(v);
-
-                    // cache average view holder within parent view
-                    v.setTag(holderAverage);
-
-                } else {
-                    // get the cached view holder object
-                    holderAverage = (ViewHolderAverage) v.getTag();
-                }
-
                 // clear out image view
-                holderAverage.image.setImageResource(0);
+                movieViewHolder.image.setImageResource(0);
 
                 // populate the text views
-                holderAverage.title.setText(movie.getOriginalTitle());
-                holderAverage.overView.setText(movie.getOverView());
+                movieViewHolder.title.setText(movie.getOriginalTitle());
+                movieViewHolder.overView.setText(movie.getOverView());
 
                 // determine correct path based on orientation
                 imagePath = (orientation == Configuration.ORIENTATION_PORTRAIT) ?  movie.getPosterPath() : movie.getBackdropPath();
 
                 // populate image using picasso
-                Picasso.with(getContext()).load(imagePath).transform(new RoundedCornersTransformation(10, 10)).into(holderAverage.image);
+                Picasso.with(getContext()).load(imagePath).transform(new RoundedCornersTransformation(10, 10)).into(movieViewHolder.image);
 
                 // return created view
                 return v;
 
             case POPULAR_MOVIE:
 
-                ViewHolderPopular viewHolderPopular;
-
-                if(v == null) {
-
-                    // get the inflated view for popular movies
-                    v = getInflatedLayoutForType(viewType);
-
-                    // create new view holder object for popular movies
-                    viewHolderPopular = new ViewHolderPopular(v);
-
-                    // cache popular view holder within parent view
-                    v.setTag(viewHolderPopular);
-                } else {
-                    // get the cached popular view holder
-                    viewHolderPopular = (ViewHolderPopular) v.getTag();
-                }
-
+                // backdrop movie pic will be used for popular movies
                 imagePath = movie.getBackdropPath();
 
-                //clear out image view
-                viewHolderPopular.popularImage.setImageResource(0);
+                // clear out image view
+                movieViewHolder.popularImage.setImageResource(0);
 
-                Picasso.with(getContext()).load(imagePath).transform(new RoundedCornersTransformation(10, 10)).into(viewHolderPopular.popularImage);
+                Picasso.with(getContext()).load(imagePath).transform(new RoundedCornersTransformation(10, 10)).into(movieViewHolder.popularImage);
 
                 return v;
-
 
             default:
                 // error: could not get the proper view type
