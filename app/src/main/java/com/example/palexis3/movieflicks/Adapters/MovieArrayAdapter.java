@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,8 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         @Nullable @BindView(R.id.tvOverView) TextView overView;
         @Nullable @BindView(R.id.ivMovieImage) ImageView image;
         @Nullable @BindView(R.id.ivPopularMovieImage) ImageView popularImage;
+        @Nullable @BindView(R.id.tvLowerPopularMovieTitle) TextView popularMovieTitle;
+        @Nullable @BindView(R.id.rbLowerPopularMovie) RatingBar popularMovieRating;
 
         public MovieViewHolder(View v) {
             ButterKnife.bind(this, v);
@@ -144,6 +147,12 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
                 // backdrop movie pic will be used for popular movies
                 imagePath = movie.getBackdropPath();
+
+                // set the title for the movie
+                movieViewHolder.popularMovieTitle.setText(movie.getOriginalTitle());
+
+                // set the rating bar of the movie
+                movieViewHolder.popularMovieRating.setNumStars(movie.getRating() / 2);
 
                 // clear out image view
                 movieViewHolder.popularImage.setImageResource(0);

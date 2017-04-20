@@ -8,10 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!--
-    <style name="rating_bar" parent="Theme.AppCompat">
-        <item name="ratingColor">@color/colorAccent</item>
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorAccent</item>
     </style>
-    -->
 
 </resources>
