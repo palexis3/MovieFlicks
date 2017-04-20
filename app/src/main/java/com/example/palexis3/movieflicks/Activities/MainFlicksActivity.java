@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import com.example.palexis3.movieflicks.Adapters.MovieArrayAdapter;
 import com.example.palexis3.movieflicks.Models.Movie;
+import com.example.palexis3.movieflicks.MovieApiClient;
 import com.example.palexis3.movieflicks.R;
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -26,12 +26,11 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainFlicksActivity extends AppCompatActivity {
 
-    private final static String API_KEY = "f1e55cc01616b64d1b66566ca00d707a";
-    private final String url = String.format("https://api.themoviedb.org/3/movie/now_playing?api_key=%s", API_KEY);
 
     ArrayList<Movie> movieList;
     MovieArrayAdapter movieAdapter;
     ListView lvItems;
+    MovieApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +48,19 @@ public class MainFlicksActivity extends AppCompatActivity {
         //setting movie adapter
         lvItems.setAdapter(movieAdapter);
 
+        client = new MovieApiClient();
+
         // listen if any items within the listview are clicked
         lvItemsListener();
 
-        AsyncHttpClient client = new AsyncHttpClient();
+        // fetch movies from api
+        fetchMovies();
+    }
+
+    private void fetchMovies() {
 
         // making an asynchronous http request
-        client.get(url, new JsonHttpResponseHandler() {
+        client.getMovies(new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -86,14 +91,9 @@ public class MainFlicksActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                 final Movie movie = movieList.get(position); // get the clicked item
+                String id = String.valueOf(movie.getId());
 
-                String video_url = String.format("https://api.themoviedb.org/3/movie/%s/videos?api_key=%s", movie.getId(), API_KEY);
-
-                // get trailer key for specific movie
-                AsyncHttpClient client = new AsyncHttpClient();
-
-
-                client.get(video_url, new JsonHttpResponseHandler(){
+                client.lvItemClicked(id, new JsonHttpResponseHandler(){
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
