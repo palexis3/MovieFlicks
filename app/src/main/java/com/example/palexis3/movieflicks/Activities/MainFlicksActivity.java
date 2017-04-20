@@ -22,23 +22,24 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 
 public class MainFlicksActivity extends AppCompatActivity {
 
-
     ArrayList<Movie> movieList;
     MovieArrayAdapter movieAdapter;
-    ListView lvItems;
     MovieApiClient client;
+
+    // instantiating list view
+    @BindView(R.id.lvMovies) ListView lvItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_flicks);
-
-        // instantiating list view
-        lvItems = (ListView) findViewById(R.id.lvMovies);
+        ButterKnife.bind(this);
 
         movieList = new ArrayList<>();
 
@@ -93,6 +94,7 @@ public class MainFlicksActivity extends AppCompatActivity {
                 final Movie movie = movieList.get(position); // get the clicked item
                 String id = String.valueOf(movie.getId());
 
+                // asynchronous callback to get the youtube video for this specific movie
                 client.lvItemClicked(id, new JsonHttpResponseHandler(){
 
                     @Override
