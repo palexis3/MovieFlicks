@@ -151,8 +151,11 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
                 // set the title for the movie
                 movieViewHolder.popularMovieTitle.setText(movie.getOriginalTitle());
 
+                // set the number of total stars to show
+                movieViewHolder.popularMovieRating.setNumStars(5);
+
                 // set the rating bar of the movie
-                movieViewHolder.popularMovieRating.setNumStars(movie.getRating() / 2);
+                movieViewHolder.popularMovieRating.setRating((float) movie.getRating() / 2);
 
                 // clear out image view
                 movieViewHolder.popularImage.setImageResource(0);
