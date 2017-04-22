@@ -7,7 +7,7 @@
         <!--  <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_height_portrait"
-        android:layout_marginRight="@dimen/tv_margin_left"> -->
+        android:layout_marginRight="@dimen/tv_margin_left">gi -->
 
         <RelativeLayout
             android:layout_width="match_parent"
