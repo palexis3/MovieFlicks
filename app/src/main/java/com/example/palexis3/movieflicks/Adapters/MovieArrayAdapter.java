@@ -66,13 +66,18 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
     // Get the type of movie View that will be created based on rating
     @Override
     public int getItemViewType(int position) {
+        return POPULAR_MOVIE;
+        /** removing two different heterogenous views
         // Return an integer here representing the type of View.
         Movie movie = movies.get(position);
         return movie.getRating() <= 5 ? AVERAGE_MOVIE : POPULAR_MOVIE;
+        */
     }
 
     // Given the item type, responsible for returning the correct inflated XML layout file
     private View getInflatedLayoutForType(int type) {
+        return LayoutInflater.from(getContext()).inflate(R.layout.popular_item_movie, null);
+       /** removing type switch statement
        switch (type) {
            case AVERAGE_MOVIE:
                return LayoutInflater.from(getContext()).inflate(R.layout.item_movie, null);
@@ -81,6 +86,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
            default:
                return LayoutInflater.from(getContext()).inflate(R.layout.item_movie, null);
        }
+       */
     }
 
     // override arrayAdapter getView to populate movie items based on ratings

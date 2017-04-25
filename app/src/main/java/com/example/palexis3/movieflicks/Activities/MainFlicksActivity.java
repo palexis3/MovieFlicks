@@ -114,6 +114,14 @@ public class MainFlicksActivity extends AppCompatActivity {
                             throw new RuntimeException("Error: Could not get key for YouTube player");
                         }
 
+
+                        // launch the movie details activity for unpopular movies
+                        Intent i = new Intent(MainFlicksActivity.this, MovieDetailActivity.class);
+                        i.putExtra("movie", Parcels.wrap(movie));
+                        i.putExtra("key", key);
+                        startActivity(i);
+
+                        /** removed popular and average movie activity
                         // launch youtube client since this is a popular movie
                         if(movie.getRating() > 5) {
                             Intent i = new Intent(MainFlicksActivity.this, QuickPlayActivity.class);
@@ -128,6 +136,7 @@ public class MainFlicksActivity extends AppCompatActivity {
                             i.putExtra("key", key);
                             startActivity(i);
                         }
+                        */
                     }
 
                     @Override
