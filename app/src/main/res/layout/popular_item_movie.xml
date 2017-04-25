@@ -4,64 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-        <!--  <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/image_height_portrait"
-        android:layout_marginRight="@dimen/tv_margin_left">gi -->
-
-        <RelativeLayout
+         <RelativeLayout
+             android:id="@+id/rvLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_height_portrait"
-            android:layout_marginTop="@dimen/image_margin_top"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true">
+            android:layout_marginRight="@dimen/tv_margin_left">
 
-               <!-- movie image -->
-            <ImageView
-               android:id="@+id/ivPopularMovieImage"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:scaleType="fitXY"
-               android:adjustViewBounds="true"
-               app:srcCompat="@mipmap/ic_launcher" />
+             <!-- movie image -->
+             <ImageView
+                 android:id="@+id/ivPopularMovieImage"
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/image_height_portrait"
+                 android:layout_marginTop="@dimen/image_margin_top"
+                 android:layout_alignParentLeft="true"
+                 android:layout_alignParentTop="true"
+                 android:scaleType="fitXY"
+                 android:adjustViewBounds="true"
+                 app:srcCompat="@mipmap/ic_launcher" />
 
-            <!--  Title and rating bar for average movie layout-->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:orientation="horizontal">
+             <!-- Play icon -->
+             <!--
+             <ImageView
+                 android:id="@+id/ivPlayIcon"
+                 android:layout_width="@dimen/play_icon_width"
+                 android:layout_height="@dimen/play_icon_height"
+                 app:srcCompat="@drawable/play_icon"
+                 android:scaleType="fitXY"
+                 android:alpha="0.7"
+                 android:layout_centerVertical="true"
+                 android:layout_centerInParent="true"/>
+            -->
 
-                <TextView
-                    android:id="@+id/tvLowerPopularMovieTitle"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@color/colorAccent"
-                    tools:text="Movie Title"/>
+         </RelativeLayout>
 
-                <RatingBar
-                    android:id="@+id/rbLowerPopularMovie"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    style="@style/RatingBar"/>
-
-            </LinearLayout>
-
-            <!-- Play icon -->
-            <ImageView
-                android:id="@+id/ivPlayIcon"
-                android:layout_width="@dimen/play_icon_width"
-                android:layout_height="@dimen/play_icon_height"
-                app:srcCompat="@drawable/play_icon"
-                android:scaleType="fitXY"
-                android:alpha="0.7"
-                android:layout_centerVertical="true"
-                android:layout_centerInParent="true"/>
-
-        </RelativeLayout>
+    <!--  Title for movie layout-->
+    <TextView
+        android:id="@+id/tvLowerPopularMovieTitle"
+        android:layout_below="@id/rvLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorAccent"
+        tools:text="Movie Title"/>
 
 </RelativeLayout>

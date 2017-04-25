@@ -10,7 +10,7 @@
 
     <!-- parent="android:style/Widget.Material.RatingBar.Small" -->
     <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/white</item>
     </style>
 
 </resources>

@@ -21,6 +21,14 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
+    /*
+    // set the number of total stars to show
+                movieViewHolder.popularMovieRating.setNumStars(5);
+
+    // set the rating bar of the movie
+                movieViewHolder.popularMovieRating.setRating((float) movie.getRating() / 2);
+    */
+
     // setting up butterknife binding
     @BindView(R.id.ivMovieDetailImage) ImageView ivMovie;
     @BindView(R.id.tvMovieDetailTitle) TextView tvTitle;
