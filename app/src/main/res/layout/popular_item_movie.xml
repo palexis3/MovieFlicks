@@ -22,19 +22,6 @@
                  android:adjustViewBounds="true"
                  app:srcCompat="@mipmap/ic_launcher" />
 
-             <!-- Play icon -->
-             <!-- Removing play icon
-             <ImageView
-                 android:id="@+id/ivPlayIcon"
-                 android:layout_width="@dimen/play_icon_width"
-                 android:layout_height="@dimen/play_icon_height"
-                 app:srcCompat="@drawable/play_icon"
-                 android:scaleType="fitXY"
-                 android:alpha="0.7"
-                 android:layout_centerVertical="true"
-                 android:layout_centerInParent="true"/>
-            -->
-
          </RelativeLayout>
 
     <!--  Title for movie layout-->

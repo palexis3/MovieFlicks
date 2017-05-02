@@ -6,8 +6,19 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/black">
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/detail_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <RelativeLayout
         android:id="@+id/rlMovieDetail"
+        android:layout_below="@id/detail_toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_movie_detail_portrait_height">
 

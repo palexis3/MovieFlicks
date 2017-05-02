@@ -1,15 +1,14 @@
 package com.example.palexis3.movieflicks.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.palexis3.movieflicks.Adapters.MovieArrayAdapter;
+import com.example.palexis3.movieflicks.Adapters.MovieRecyclerAdapter;
 import com.example.palexis3.movieflicks.Models.Movie;
 import com.example.palexis3.movieflicks.MovieApiClient;
 import com.example.palexis3.movieflicks.R;
@@ -18,7 +17,6 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -28,18 +26,50 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainFlicksActivity extends AppCompatActivity {
 
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter recyclerAdapter;
+
     ArrayList<Movie> movieList;
-    MovieArrayAdapter movieAdapter;
     MovieApiClient client;
 
-    // instantiating list view
-    @BindView(R.id.lvMovies) ListView lvItems;
+    // instantiating views
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_flicks);
         ButterKnife.bind(this);
+
+        // setting the toolbar
+        setSupportActionBar(toolbar);
+
+        client = new MovieApiClient();
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.rvMovies);
+
+        // instantiate movie list
+        movieList = new ArrayList<>();
+
+        // set up vertical linear layout
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // fetch movies from API call
+        fetchMovies();
+
+        /*
+        // add movie list to recycler view adapter
+        recyclerAdapter = new MovieRecyclerAdapter(getApplicationContext(), movieList);
+
+        mRecyclerView.setAdapter(recyclerAdapter);
+
+        */
+
+
+        /** Old listview array adpater implementation
+         *
+         *
+         @BindView(R.id.lvMovies) ListView lvItems;
 
         movieList = new ArrayList<>();
 
@@ -56,6 +86,7 @@ public class MainFlicksActivity extends AppCompatActivity {
 
         // fetch movies from api
         fetchMovies();
+        */
     }
 
     private void fetchMovies() {
@@ -67,9 +98,16 @@ public class MainFlicksActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray movieJSONResults;
                 try {
+                    //int curSize = recyclerAdapter.getItemCount();
                     movieJSONResults = response.getJSONArray("results");
                     movieList.addAll(Movie.fromJSONArray(movieJSONResults));
-                    movieAdapter.notifyDataSetChanged();
+
+                    // add movie list to recycler view adapter
+                    recyclerAdapter = new MovieRecyclerAdapter(getApplicationContext(), movieList);
+
+                    mRecyclerView.setAdapter(recyclerAdapter);
+
+                    //recyclerAdapter.notifyItemRangeChanged(curSize, movieList.size());
                     Log.d("DEBUG", movieList.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -85,6 +123,7 @@ public class MainFlicksActivity extends AppCompatActivity {
     }
 
     // a method to listen if any particular items are clicked on
+    /*
     private void lvItemsListener() {
 
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -136,8 +175,9 @@ public class MainFlicksActivity extends AppCompatActivity {
                             i.putExtra("key", key);
                             startActivity(i);
                         }
-                        */
+
                     }
+
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -145,8 +185,10 @@ public class MainFlicksActivity extends AppCompatActivity {
                         super.onFailure(statusCode, headers, responseString, throwable);
                     }
                 });
+
+
             }
         });
+     */
     }
 
-}

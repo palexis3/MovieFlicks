@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import com.example.palexis3.movieflicks.Models.Movie;
 import com.example.palexis3.movieflicks.R;
@@ -34,6 +35,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     @BindView(R.id.tvMovieDetailTitle) TextView tvTitle;
     @BindView(R.id.tvMovieDetailReleaseDate) TextView tvReleaseDate;
     @BindView(R.id.tvMovieDetailOverview) TextView tvOverView;
+    @BindView(R.id.detail_toolbar) Toolbar toolbar;
 
     private String key;
 
@@ -43,6 +45,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
 
         //get the movie passed in from the intent
         Movie movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra("movie"));
