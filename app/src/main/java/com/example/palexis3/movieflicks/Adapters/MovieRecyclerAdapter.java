@@ -64,9 +64,9 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
         // backdrop movie pic will be used for popular movies
         String imagePath = movie.getBackdropPath();
 
-        TextView tvTilte =  holder.title;
+        TextView tvTitle =  holder.title;
         // set the title for the movie
-        tvTilte.setText(movie.getOriginalTitle());
+        tvTitle.setText(movie.getOriginalTitle());
 
         TextView tvRating = holder.rating;
         // set the rating for this movie
@@ -78,7 +78,6 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
 
         Picasso.with(context).load(imagePath).transform(new RoundedCornersTransformation(10, 10)).into(ivMovie);
     }
-    
 
     @Override
     public int getItemCount() {

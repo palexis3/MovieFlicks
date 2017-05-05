@@ -52,18 +52,12 @@ public class MainFlicksActivity extends AppCompatActivity {
         movieList = new ArrayList<>();
 
         // set up vertical linear layout
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        // fetch movies from API call
-        fetchMovies();
-
-        /*
         // add movie list to recycler view adapter
         recyclerAdapter = new MovieRecyclerAdapter(getApplicationContext(), movieList);
 
         mRecyclerView.setAdapter(recyclerAdapter);
-
-        */
 
 
         /** Old listview array adpater implementation
@@ -89,6 +83,15 @@ public class MainFlicksActivity extends AppCompatActivity {
         */
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // fetch movies from API call
+        fetchMovies();
+    }
+
     private void fetchMovies() {
 
         // making an asynchronous http request
@@ -101,12 +104,6 @@ public class MainFlicksActivity extends AppCompatActivity {
                     //int curSize = recyclerAdapter.getItemCount();
                     movieJSONResults = response.getJSONArray("results");
                     movieList.addAll(Movie.fromJSONArray(movieJSONResults));
-
-                    // add movie list to recycler view adapter
-                    recyclerAdapter = new MovieRecyclerAdapter(getApplicationContext(), movieList);
-
-                    mRecyclerView.setAdapter(recyclerAdapter);
-
                     //recyclerAdapter.notifyItemRangeChanged(curSize, movieList.size());
                     Log.d("DEBUG", movieList.toString());
                 } catch (JSONException e) {
