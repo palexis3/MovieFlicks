@@ -1,5 +1,6 @@
 package com.example.palexis3.movieflicks.Activities;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,9 +11,8 @@ import android.widget.Toast;
 
 import com.example.palexis3.movieflicks.Adapters.MovieRecyclerAdapter;
 import com.example.palexis3.movieflicks.Models.Movie;
-import com.example.palexis3.movieflicks.MovieApiClient;
+import com.example.palexis3.movieflicks.Networking.MovieOkHttpClient;
 import com.example.palexis3.movieflicks.R;
-import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,15 +22,11 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cz.msebera.android.httpclient.Header;
 
 public class MainFlicksActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter recyclerAdapter;
-
-    ArrayList<Movie> movieList;
-    MovieApiClient client;
 
     // instantiating views
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -44,20 +40,18 @@ public class MainFlicksActivity extends AppCompatActivity {
         // setting the toolbar
         setSupportActionBar(toolbar);
 
-        client = new MovieApiClient();
+        //client = new MovieApiClient();
+        // add movie list to recycler view adapter
+        //recyclerAdapter = new MovieRecyclerAdapter(getApplicationContext(), movieList);
+        //mRecyclerView.setAdapter(recyclerAdapter);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rvMovies);
-
-        // instantiate movie list
-        movieList = new ArrayList<>();
 
         // set up vertical linear layout
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        // add movie list to recycler view adapter
-        recyclerAdapter = new MovieRecyclerAdapter(getApplicationContext(), movieList);
-
-        mRecyclerView.setAdapter(recyclerAdapter);
+        // call movie caller async task
+        fetchMovies();
 
 
         /** Old listview array adpater implementation
@@ -83,15 +77,60 @@ public class MainFlicksActivity extends AppCompatActivity {
         */
     }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        // fetch movies from API call
-        fetchMovies();
+    public void fetchMovies() {
+        new MovieCallerTask().execute("Task");
     }
 
+    private class MovieCallerTask extends AsyncTask<String, Void, String> {
+
+        // call the okhttp client and parse the movies into arraylist
+        @Override
+        protected String doInBackground(String... str) {
+
+            String r = "Didn't succeed";
+
+            // create an okHttp client to get JSON items
+            MovieOkHttpClient client = new MovieOkHttpClient();
+
+            // getting movies from api call
+            try{
+                r = client.getMovies();
+                Log.d("OKHTTP-CLIENT", r);
+                System.out.println(r);
+            } catch(Exception e) {
+                Log.d("DEBUG", e.getLocalizedMessage());
+            }
+
+            return r;
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+
+            if(response.equalsIgnoreCase("Didn't succeed")) {
+                Toast.makeText(getApplicationContext(), "Could not get proper movie response in main thread", Toast.LENGTH_LONG).show();
+            }
+
+            ArrayList<Movie> movieList = new ArrayList<>();
+            JSONArray movieJSONResults;
+
+            try {
+                JSONObject json = new JSONObject(response);
+                movieJSONResults = json.getJSONArray("results");
+                movieList.addAll(Movie.fromJSONArray(movieJSONResults));
+            } catch(JSONException e) {
+                Log.d("OKHTTP-DEBUG", e.toString());
+                Toast.makeText(getApplicationContext(), "Error: Json parsing exception", Toast.LENGTH_LONG).show();
+            }
+
+            // add movie list to recycler view adapter
+            recyclerAdapter = new MovieRecyclerAdapter(getApplicationContext(), movieList);
+
+            mRecyclerView.setAdapter(recyclerAdapter);
+        }
+    }
+
+    /*
     private void fetchMovies() {
 
         // making an asynchronous http request
@@ -118,6 +157,7 @@ public class MainFlicksActivity extends AppCompatActivity {
             }
         });
     }
+    */
 
     // a method to listen if any particular items are clicked on
     /*

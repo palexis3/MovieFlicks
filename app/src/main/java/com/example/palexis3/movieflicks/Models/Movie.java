@@ -15,7 +15,7 @@ public class Movie {
     String overView;
     String backdropPath;
     String releaseDate;
-    int rating;
+    double rating;
     int id;
 
     public String getPosterPath() {
@@ -34,7 +34,7 @@ public class Movie {
         return overView;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
@@ -50,7 +50,7 @@ public class Movie {
         this.originalTitle = jsonObject.getString("original_title");
         this.overView = jsonObject.getString("overview");
         this.backdropPath = jsonObject.getString("backdrop_path");
-        this.rating = jsonObject.getInt("vote_average");
+        this.rating = jsonObject.getDouble("vote_average");
         this.id = jsonObject.getInt("id");
         this.releaseDate = jsonObject.getString("release_date");
     }

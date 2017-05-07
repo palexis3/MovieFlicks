@@ -32,6 +32,7 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
 
         public MovieViewHolder(View view) {
             super(view);
+
             cv = (CardView) view.findViewById(R.id.cv);
             movieImage = (ImageView) view.findViewById(R.id.ivCardViewMovieImage);
             title = (TextView) view.findViewById(R.id.tvCardViewMovieTitle);
@@ -70,13 +71,14 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
 
         TextView tvRating = holder.rating;
         // set the rating for this movie
-        tvRating.setText(movie.getRating());
+        tvRating.setText(String.valueOf(movie.getRating()));
 
         ImageView ivMovie = holder.movieImage;
+
         // clear out image view
         ivMovie.setImageResource(0);
 
-        Picasso.with(context).load(imagePath).transform(new RoundedCornersTransformation(10, 10)).into(ivMovie);
+        Picasso.with(context).load(imagePath).transform(new RoundedCornersTransformation(5, 5)).into(ivMovie);
     }
 
     @Override

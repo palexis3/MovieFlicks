@@ -1,4 +1,4 @@
-package com.example.palexis3.movieflicks;
+package com.example.palexis3.movieflicks.Networking;
 
 
 import com.loopj.android.http.AsyncHttpClient;
