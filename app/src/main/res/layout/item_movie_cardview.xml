@@ -8,8 +8,9 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="4dp"
         app:cardUseCompatPadding="true"
-        app:cardCornerRadius="5dp">
+        app:cardBackgroundColor="@color/white_shade">
 
 
         <RelativeLayout
@@ -18,12 +19,9 @@
 
             <ImageView
                 android:id="@+id/ivCardViewMovieImage"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignParentTop="true"
-                android:layout_centerInParent="true"
-                android:padding="5dp"
+                android:adjustViewBounds="true"
                 android:scaleType="fitXY"/>
             
             <TextView
@@ -31,37 +29,35 @@
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ivCardViewMovieImage"
-                android:textSize="15sp"
+                android:textSize="20sp"
                 android:layout_marginTop="1dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="4dp"
                 android:textColor="@color/colorAccent"
                 tools:text="Movie Title"/>
-            
-            
+
+
+            <TextView
+                android:id="@+id/tvCardViewMoreInfo"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_marginLeft="4dp"
+                android:layout_below="@id/tvCardViewMovieTitle"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/more_info"/>
+
+
             <TextView
                 android:id="@+id/tvCardViewRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ivCardViewMovieImage"
-                android:layout_toRightOf="@id/tvCardViewMovieTitle"
-                android:layout_marginTop="1dp"
-                android:layout_marginRight="15dp"
+                android:layout_below="@id/tvCardViewMovieTitle"
+                android:layout_toRightOf="@id/tvCardViewMoreInfo"
+                android:layout_marginTop="9dp"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/black"
                 android:drawableRight="@drawable/star"
                 android:drawablePadding="4dp"/>
-
-            <TextView
-                android:id="@+id/tvCardViewMoreInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_below="@id/tvCardViewMovieTitle"
-                android:textColor="@color/colorPrimary"
-                android:text="@string/more_info"
-                android:drawableRight="@drawable/click_right"
-                android:padding="-1dp"/>
-
         </RelativeLayout>
 
 </android.support.v7.widget.CardView>

@@ -2,4 +2,6 @@
     <string name="app_name">MovieFlicks</string>
     <string name="this_week">This Week\'s Movies</string>
     <string name="more_info">More Info</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Any Movie</string>
 </resources>

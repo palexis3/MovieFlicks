@@ -10,6 +10,7 @@ import java.util.ArrayList;
 @Parcel
 public class Movie {
 
+    String youtubeKey;
     String posterPath;
     String originalTitle;
     String overView;
@@ -17,6 +18,14 @@ public class Movie {
     String releaseDate;
     double rating;
     int id;
+
+    public void setYoutubeKey(String youtubeKey) {
+        this.youtubeKey = youtubeKey;
+    }
+
+    public String getYoutubeKey() {
+        return youtubeKey;
+    }
 
     public String getPosterPath() {
         return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
