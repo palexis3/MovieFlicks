@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -27,7 +28,8 @@ import butterknife.ButterKnife;
 public class MovieDetailActivity extends AppCompatActivity {
 
     // setting up butterknife binding
-    @BindView(R.id.ivMovieDetailImage) ImageView ivMovie;
+    @BindView(R.id.ivMovieBackdropImage) ImageView ivBackdropMovie;
+    @BindView(R.id.ivMoviePosterImage) ImageView ivPosterMovie;
     @BindView(R.id.tvMovieDetailTitle) TextView tvTitle;
     @BindView(R.id.tvMovieDetailReleaseDate) TextView tvReleaseDate;
     @BindView(R.id.tvMovieDetailOverview) TextView tvOverView;
@@ -72,11 +74,14 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvTitle.setText(movie.getOriginalTitle());
         tvReleaseDate.setText(release_date);
         tvOverView.setText(movie.getOverView());
+        tvOverView.setMovementMethod(new ScrollingMovementMethod());
         String rating = movie.getRating() > 0.0 ? String.valueOf(movie.getRating()) : "N/A";
         tvRatingBar.setText(rating);
 
-        // load image with picasso
-        Picasso.with(MovieDetailActivity.this).load(movie.getBackdropPath()).into(ivMovie);
+        // load images with picasso
+        Picasso.with(MovieDetailActivity.this).load(movie.getBackdropPath()).into(ivBackdropMovie);
+
+        Picasso.with(MovieDetailActivity.this).load(movie.getPosterPath()).into(ivPosterMovie);
 
         // listener waits for the image to be clicked to launch youtube player
         imageViewListener();
@@ -90,7 +95,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void imageViewListener() {
-        ivMovie.setOnClickListener(new View.OnClickListener(){
+        ivBackdropMovie.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 if(key != null) {
