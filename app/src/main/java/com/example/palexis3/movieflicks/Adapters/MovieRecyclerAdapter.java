@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.palexis3.movieflicks.Activities.MovieDetailActivity;
-import com.example.palexis3.movieflicks.Models.Movie;
+import com.example.palexis3.movieflicks.Models.NewMovies;
 import com.example.palexis3.movieflicks.Networking.MovieOkHttpClient;
 import com.example.palexis3.movieflicks.R;
 import com.squareup.picasso.Picasso;
@@ -26,7 +26,7 @@ import java.util.List;
 
 public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHolder> {
 
-    private List<Movie> movies; // get list of all movies
+    private List<NewMovies> movies; // get list of all movies
     private Context context;
 
     public static class MovieViewHolder extends RecyclerView.ViewHolder {
@@ -49,7 +49,7 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
 
     }
 
-    public MovieRecyclerAdapter(Context context, List<Movie> movies) {
+    public MovieRecyclerAdapter(Context context, List<NewMovies> movies) {
         this.movies = movies;
         this.context = context;
     }
@@ -67,7 +67,7 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
 
-        final Movie movie = movies.get(position);
+        final NewMovies movie = movies.get(position);
 
         // backdrop movie pic will be used for popular movies
         String imagePath = movie.getBackdropPath();
@@ -111,13 +111,13 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
     }
 
     // an async task that gets the youtube key for a movie and then calls the youtube movie details intent
-    private class YouTubeCallerTask extends AsyncTask<Movie, Void, Movie> {
+    private class YouTubeCallerTask extends AsyncTask<NewMovies, Void, NewMovies> {
 
         // get this movie youtube key
         @Override
-        protected Movie doInBackground(Movie... params) {
+        protected NewMovies doInBackground(NewMovies... params) {
 
-            Movie movie = null;
+            NewMovies movie = null;
 
             // create okhttp client
             MovieOkHttpClient client = new MovieOkHttpClient();
@@ -138,7 +138,7 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
         }
 
         @Override
-        protected void onPostExecute(Movie movie) {
+        protected void onPostExecute(NewMovies movie) {
 
             boolean found = true;
             if(movie == null) {

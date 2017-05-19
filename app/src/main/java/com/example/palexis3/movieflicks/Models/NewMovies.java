@@ -8,7 +8,7 @@ import org.parceler.Parcel;
 import java.util.ArrayList;
 
 @Parcel
-public class Movie {
+public class NewMovies {
 
     String youtubeKey;
     String posterPath;
@@ -32,7 +32,7 @@ public class Movie {
     }
 
     public String getBackdropPath() {
-        return String.format("https://image.tmdb.org/t/p/w342/%s", backdropPath);
+        return String.format("https://image.tmdb.org/t/p/w780/%s", backdropPath);
     }
 
     public String getOriginalTitle() {
@@ -52,9 +52,9 @@ public class Movie {
     public String getReleaseDate() { return releaseDate; }
 
     /// empty constructor needed by the Parceler library
-    public Movie() {}
+    public NewMovies() {}
 
-    public Movie(JSONObject jsonObject) throws JSONException {
+    public NewMovies(JSONObject jsonObject) throws JSONException {
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overView = jsonObject.getString("overview");
@@ -65,13 +65,13 @@ public class Movie {
     }
 
     // factory method takes in a json array to then create a list of movie objects
-    public static ArrayList<Movie> fromJSONArray(JSONArray array) {
-        ArrayList<Movie> results = new ArrayList<>();
+    public static ArrayList<NewMovies> fromJSONArray(JSONArray array) {
+        ArrayList<NewMovies> results = new ArrayList<>();
 
         // convert each element in the json array to a movie object
         for(int i = 0; i < array.length(); i++) {
             try{
-                results.add(new Movie(array.getJSONObject(i)));
+                results.add(new NewMovies(array.getJSONObject(i)));
             } catch(JSONException e) {
                 e.printStackTrace();
             }

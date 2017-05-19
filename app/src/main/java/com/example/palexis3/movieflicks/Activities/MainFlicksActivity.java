@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.palexis3.movieflicks.Adapters.MovieRecyclerAdapter;
-import com.example.palexis3.movieflicks.Models.Movie;
+import com.example.palexis3.movieflicks.Models.NewMovies;
 import com.example.palexis3.movieflicks.Networking.MovieOkHttpClient;
 import com.example.palexis3.movieflicks.R;
 
@@ -126,13 +126,13 @@ public class MainFlicksActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Could not get proper movie response in main thread", Toast.LENGTH_LONG).show();
             }
 
-            ArrayList<Movie> movieList = new ArrayList<>();
+            ArrayList<NewMovies> movieList = new ArrayList<>();
             JSONArray movieJSONResults;
 
             try {
                 JSONObject json = new JSONObject(response);
                 movieJSONResults = json.getJSONArray("results");
-                movieList.addAll(Movie.fromJSONArray(movieJSONResults));
+                movieList.addAll(NewMovies.fromJSONArray(movieJSONResults));
             } catch(JSONException e) {
                 Log.d("OKHTTP-DEBUG", e.toString());
                 Toast.makeText(getApplicationContext(), "Error: Json parsing exception", Toast.LENGTH_LONG).show();

@@ -12,8 +12,9 @@ import okhttp3.Response;
 public class MovieOkHttpClient {
 
     private OkHttpClient client;
+    private final static String REGION = "US";
     private final static String API_KEY = "f1e55cc01616b64d1b66566ca00d707a";
-    private final static String URL = "https://api.themoviedb.org/3/movie/now_playing";
+    private final static String URL = "https://api.themoviedb.org/3/movie/upcoming";
     private final static String VIDEO_URL = "https://api.themoviedb.org/3/movie/%s/videos";
     private final static String SEARCH = "https://api.themoviedb.org/3/search/movie";
 
@@ -25,6 +26,7 @@ public class MovieOkHttpClient {
     public String getMovies() throws IOException {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(URL).newBuilder();
         urlBuilder.addQueryParameter("api_key", API_KEY);
+        urlBuilder.addQueryParameter("region", REGION);
         String url = urlBuilder.build().toString();
         Request request = new Request.Builder().url(url).build();
         Response response = client.newCall(request).execute();

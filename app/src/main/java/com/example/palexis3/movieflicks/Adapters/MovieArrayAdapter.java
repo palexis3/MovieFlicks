@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.palexis3.movieflicks.Models.Movie;
+import com.example.palexis3.movieflicks.Models.NewMovies;
 import com.example.palexis3.movieflicks.R;
 import com.squareup.picasso.Picasso;
 
@@ -22,14 +22,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
-public class MovieArrayAdapter extends ArrayAdapter<Movie> {
+public class MovieArrayAdapter extends ArrayAdapter<NewMovies> {
 
     private final static int AVERAGE_MOVIE = 0;
     private final static int POPULAR_MOVIE = 1;
     private final static int ALL_RATINGS_LENGTH = 2;
 
     private Context context; // used to determine current activity
-    private List<Movie> movies; // get list of all movies
+    private List<NewMovies> movies; // get list of all movies
 
 
     // view holder cache for movies (using butterknife for view binding)
@@ -49,7 +49,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         }
     }
 
-    public MovieArrayAdapter(Context context, List<Movie> movies) {
+    public MovieArrayAdapter(Context context, List<NewMovies> movies) {
         super(context, 0, movies);
         this.context = context;
         this.movies = movies;
@@ -69,7 +69,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         return POPULAR_MOVIE;
         /** removing two different heterogenous views
         // Return an integer here representing the type of View.
-        Movie movie = movies.get(position);
+        NewMovies movie = movies.get(position);
         return movie.getRating() <= 5 ? AVERAGE_MOVIE : POPULAR_MOVIE;
         */
     }
@@ -98,7 +98,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         int viewType = getItemViewType(position);
 
         // get the data item for this position
-        final Movie movie = getItem(position);
+        final NewMovies movie = getItem(position);
 
         // get the current orientation to determine the appropriate image
         int orientation = context.getResources().getConfiguration().orientation;

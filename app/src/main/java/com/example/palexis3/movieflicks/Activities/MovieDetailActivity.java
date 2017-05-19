@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.palexis3.movieflicks.Models.Movie;
+import com.example.palexis3.movieflicks.Models.NewMovies;
 import com.example.palexis3.movieflicks.R;
 import com.squareup.picasso.Picasso;
 
@@ -48,7 +48,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //get the movie passed in from the intent
-        Movie movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra("movie"));
+        NewMovies movie = (NewMovies) Parcels.unwrap(getIntent().getParcelableExtra("movie"));
         key = (movie.getYoutubeKey() != null) ? movie.getYoutubeKey() : null;
 
         map = new HashMap<>();
