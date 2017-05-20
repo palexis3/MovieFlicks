@@ -28,7 +28,8 @@ public class TvShows {
     int numOfSeasons;
 
 
-    // getters
+    /** Getters */
+
     public int getId() {
         return id;
     }
@@ -81,7 +82,7 @@ public class TvShows {
         return numOfSeasons;
     }
 
-    // setters
+    /** Setters */
     public void setGenres(ArrayList<String> genres) {
         this.genres = genres;
     }
