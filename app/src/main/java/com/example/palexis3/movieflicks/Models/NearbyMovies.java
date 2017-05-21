@@ -14,6 +14,7 @@ public class NearbyMovies {
 
     String title;
     String releaseDate;
+    String rating;
     List<String> genres;
     String description;
     List<String> cast;

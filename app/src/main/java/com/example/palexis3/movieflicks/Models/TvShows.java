@@ -83,6 +83,7 @@ public class TvShows {
     }
 
     /** Setters */
+
     public void setGenres(ArrayList<String> genres) {
         this.genres = genres;
     }
