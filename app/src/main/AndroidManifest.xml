@@ -23,7 +23,7 @@
                 android:resource="@xml/searchable" />
         </activity>
 
-        <activity android:name=".Activities.MovieDetailActivity"></activity>
+        <activity android:name=".Activities.UpcomingMovieDetailActivity"></activity>
 
         <activity android:name=".Activities.QuickPlayActivity"></activity>
 

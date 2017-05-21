@@ -46,7 +46,7 @@ public class UpcomingMovieFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_upcoming_movies, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_upcoming_movie, container, false);
         rootView.setTag(TAG);
 
         return rootView;

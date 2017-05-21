@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.palexis3.movieflicks.Activities.MovieDetailActivity;
+import com.example.palexis3.movieflicks.Activities.UpcomingMovieDetailActivity;
 import com.example.palexis3.movieflicks.Models.NewMovies;
 import com.example.palexis3.movieflicks.Networking.MovieOkHttpClient;
 import com.example.palexis3.movieflicks.R;
@@ -57,7 +57,7 @@ public class UpcomingMovieRecyclerAdapter extends RecyclerView.Adapter<UpcomingM
     // Create new views (invoked by the layout manager)
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_cardview, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.upcoming_movie_cardview, parent, false);
         MovieViewHolder mvh = new MovieViewHolder(v);
         return mvh;
     }
@@ -148,7 +148,7 @@ public class UpcomingMovieRecyclerAdapter extends RecyclerView.Adapter<UpcomingM
             // first check if we can get this movie's detail
             if(found) {
                 // launch the movie details activity for movie
-                Intent i = new Intent(context, MovieDetailActivity.class);
+                Intent i = new Intent(context, UpcomingMovieDetailActivity.class);
                 i.putExtra("movie", Parcels.wrap(movie));
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // probably not the best way to start intent, try Dagger
                 context.startActivity(i);

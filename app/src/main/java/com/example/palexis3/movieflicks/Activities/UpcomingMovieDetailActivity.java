@@ -25,7 +25,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MovieDetailActivity extends AppCompatActivity {
+public class UpcomingMovieDetailActivity extends AppCompatActivity {
 
     // setting up butterknife binding
     @BindView(R.id.ivMovieBackdropImage) ImageView ivBackdropMovie;
@@ -41,7 +41,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_detail);
+        setContentView(R.layout.activity_upcoming_movie_detail);
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
@@ -62,9 +62,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvRatingBar.setText(rating);
 
         // load images with picasso
-        Picasso.with(MovieDetailActivity.this).load(movie.getBackdropPath()).into(ivBackdropMovie);
+        Picasso.with(UpcomingMovieDetailActivity.this).load(movie.getBackdropPath()).into(ivBackdropMovie);
 
-        Picasso.with(MovieDetailActivity.this).load(movie.getPosterPath()).into(ivPosterMovie);
+        Picasso.with(UpcomingMovieDetailActivity.this).load(movie.getPosterPath()).into(ivPosterMovie);
 
         // listener waits for the image to be clicked to launch youtube player
         imageViewListener();
@@ -108,7 +108,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(key != null) {
                     // start the youtube viewer intent
-                    Intent i = new Intent(MovieDetailActivity.this, QuickPlayActivity.class);
+                    Intent i = new Intent(UpcomingMovieDetailActivity.this, QuickPlayActivity.class);
                     i.putExtra("key", key);
                     startActivity(i);
                 } else {
