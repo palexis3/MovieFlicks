@@ -18,6 +18,15 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpPager"
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v4.view.ViewPager>
+
+    <!--
     <TextView
         android:id="@+id/tvThisWeek"
         android:layout_width="wrap_content"
@@ -37,5 +46,6 @@
         android:layout_below="@id/tvThisWeek"
         android:layout_marginTop="8dp"
         android:scrollbars="vertical"/>
+     -->
 
 </RelativeLayout>

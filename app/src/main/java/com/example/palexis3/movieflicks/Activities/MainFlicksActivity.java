@@ -1,40 +1,28 @@
 package com.example.palexis3.movieflicks.Activities;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.palexis3.movieflicks.Adapters.MovieRecyclerAdapter;
-import com.example.palexis3.movieflicks.Models.NewMovies;
-import com.example.palexis3.movieflicks.Networking.MovieOkHttpClient;
+import com.example.palexis3.movieflicks.Fragments.UpcomingMovieFragment;
 import com.example.palexis3.movieflicks.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainFlicksActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter recyclerAdapter;
+    //private RecyclerView mRecyclerView;
+    //private RecyclerView.Adapter recyclerAdapter;
+    FragmentPagerAdapter adapterViewPager;
 
     // instantiating views
     @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.tvThisWeek) TextView tvTitle;
+   // @BindView(R.id.tvThisWeek) TextView tvTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +34,11 @@ public class MainFlicksActivity extends AppCompatActivity {
         // setting the toolbar
         setSupportActionBar(toolbar);
 
+        ViewPager viewPager = (ViewPager) findViewById(R.id.vpPager);
+        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapterViewPager);
+
+     /*
         mRecyclerView = (RecyclerView) findViewById(R.id.rvMovies);
 
         // set up vertical linear layout
@@ -53,13 +46,47 @@ public class MainFlicksActivity extends AppCompatActivity {
 
         // call movie caller async task
         fetchMovies();
+      */
     }
 
+    public static class MyPagerAdapter extends FragmentPagerAdapter {
+
+        private static int NUM_OF_PAGES = 3;
+
+        public MyPagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_OF_PAGES;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new UpcomingMovieFragment();
+                case 1:
+                    return new UpcomingMovieFragment();
+                case 2:
+                    return new UpcomingMovieFragment();
+                default:
+                    return null;
+            }
+        }
+    }
+
+
+    /*
     public void fetchMovies() {
         new MovieCallerTask().execute(",");
     }
+    */
 
-    // searching functionality
+   /** TODO: Searching functionality, don't know how to populate this view once a search comes in */
+
+  /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -91,7 +118,9 @@ public class MainFlicksActivity extends AppCompatActivity {
         });
         return true;
     }
+  */
 
+  /*
     // an asynctask class to get list of movie items in a background thread
     private class MovieCallerTask extends AsyncTask<String, Void, String> {
 
@@ -139,11 +168,12 @@ public class MainFlicksActivity extends AppCompatActivity {
             }
 
             // add movie list to recycler view adapter
-            recyclerAdapter = new MovieRecyclerAdapter(getApplicationContext(), movieList);
+            recyclerAdapter = new UpcomingMovieRecyclerAdapter(getApplicationContext(), movieList);
 
             // set adapter to recycler view
             mRecyclerView.setAdapter(recyclerAdapter);
         }
     }
+    */
 }
 

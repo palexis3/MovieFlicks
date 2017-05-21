@@ -24,7 +24,7 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
-public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHolder> {
+public class UpcomingMovieRecyclerAdapter extends RecyclerView.Adapter<UpcomingMovieRecyclerAdapter.MovieViewHolder> {
 
     private List<NewMovies> movies; // get list of all movies
     private Context context;
@@ -49,7 +49,7 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
 
     }
 
-    public MovieRecyclerAdapter(Context context, List<NewMovies> movies) {
+    public UpcomingMovieRecyclerAdapter(Context context, List<NewMovies> movies) {
         this.movies = movies;
         this.context = context;
     }
