@@ -15,6 +15,7 @@
     <!-- margins for views within main/detail flicks activity -->
     <dimen name="tv_margin_left">8dp</dimen>
     <dimen name="tv_margin_right">6dp</dimen>
+    <dimen name="tv_margin_top">4dp</dimen>
     <dimen name="title_margin_above">4dp</dimen>
     <dimen name="image_margin_top">8dp</dimen>
 
@@ -27,6 +28,10 @@
     <dimen name="tv_movie_detail_overview_margin_top">16dp</dimen>
     <dimen name="rating_margin_left">13dp</dimen>
     <dimen name="tv_movie_detail_title_margin_top">8dp</dimen>
+
+    <!-- tv show detail activity dimensions -->
+    <dimen name="image_tvshow_detail_portrait_height">190dp</dimen>
+    <dimen name="tv_tvshow_detail_overview_margin_top">5dp</dimen>
 
     <!-- Rating star dimensions -->
     <dimen name="rating_star_width">90dp</dimen>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- This is a reusable cardview for upcoming movies and popular tvShows -->
 <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -18,22 +19,22 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/ivCardViewMovieImage"
+                android:id="@+id/ivCardViewImage"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"/>
             
             <TextView
-                android:id="@+id/tvCardViewMovieTitle"
+                android:id="@+id/tvCardViewTitle"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ivCardViewMovieImage"
+                android:layout_below="@id/ivCardViewImage"
                 android:textSize="20sp"
                 android:layout_marginTop="1dp"
                 android:layout_marginLeft="4dp"
                 android:textColor="@color/colorAccent"
-                tools:text="Movie Title"/>
+                tools:text="Title"/>
 
 
             <TextView
@@ -42,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginLeft="4dp"
-                android:layout_below="@id/tvCardViewMovieTitle"
+                android:layout_below="@id/tvCardViewTitle"
                 android:textColor="@color/colorPrimary"
                 android:text="@string/more_info"/>
 
@@ -51,7 +52,7 @@
                 android:id="@+id/tvCardViewRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvCardViewMovieTitle"
+                android:layout_below="@id/tvCardViewTitle"
                 android:layout_toRightOf="@id/tvCardViewMoreInfo"
                 android:layout_marginTop="9dp"
                 android:layout_marginLeft="10dp"

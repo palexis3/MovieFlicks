@@ -25,6 +25,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/** TODO: Implement a default "Not Found" for pictures, also check out Glide for picture performance */
 public class UpcomingMovieDetailActivity extends AppCompatActivity {
 
     // setting up butterknife binding
@@ -66,7 +67,7 @@ public class UpcomingMovieDetailActivity extends AppCompatActivity {
 
         Picasso.with(UpcomingMovieDetailActivity.this).load(movie.getPosterPath()).into(ivPosterMovie);
 
-        // listener waits for the image to be clicked to launch youtube player
+        // listener waits for the movie to be clicked to launch youtube player
         imageViewListener();
     }
 

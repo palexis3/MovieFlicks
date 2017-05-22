@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.example.palexis3.movieflicks.Fragments.PopularTvShowsFragment;
 import com.example.palexis3.movieflicks.Fragments.UpcomingMovieFragment;
 import com.example.palexis3.movieflicks.R;
 
@@ -68,7 +69,7 @@ public class MainFlicksActivity extends AppCompatActivity {
                 case 0:
                     return new UpcomingMovieFragment();
                 case 1:
-                    return new UpcomingMovieFragment();
+                    return new PopularTvShowsFragment();
                 case 2:
                     return new UpcomingMovieFragment();
                 default:
@@ -131,7 +132,7 @@ public class MainFlicksActivity extends AppCompatActivity {
             String r = "Didn't succeed";
 
             // create an okHttp client to get JSON items
-            MovieOkHttpClient client = new MovieOkHttpClient();
+            MyOkHttpClient client = new MyOkHttpClient();
 
             // getting movies from api call or search query
             try{

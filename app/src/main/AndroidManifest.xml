@@ -27,6 +27,8 @@
 
         <activity android:name=".Activities.QuickPlayActivity"></activity>
 
-    </application>
+        <activity android:name=".Activities.PopularTvShowsDetailActivity"></activity>
+
+   </application>
 
 </manifest>

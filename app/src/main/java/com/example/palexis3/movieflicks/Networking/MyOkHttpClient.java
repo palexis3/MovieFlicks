@@ -5,13 +5,12 @@ import android.util.Log;
 import java.io.IOException;
 
 import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MovieOkHttpClient {
+public class MyOkHttpClient {
 
-    private OkHttpClient client;
+    private okhttp3.OkHttpClient client;
 
     /** Upcoming movies and popular tv shows implementation leverages the api.theMoviedb.org endpoints */
 
@@ -29,8 +28,8 @@ public class MovieOkHttpClient {
     private final static String TMS_API_KEY = "afygcfx8hkh6mskbu5qrgp53";
     private final static String NEARBY_MOVIES_URL = "http://data.tmsapi.com/v1.1/movies/showings";
 
-    public MovieOkHttpClient() {
-        this.client = new OkHttpClient();
+    public MyOkHttpClient() {
+        this.client = new okhttp3.OkHttpClient();
     }
 
     // get upcoming movies synchronously from movies api
@@ -119,7 +118,6 @@ public class MovieOkHttpClient {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         String current_date = dateFormat.format(date).toString();
-
 
    }
 

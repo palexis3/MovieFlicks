@@ -72,7 +72,7 @@
         android:layout_below="@id/tvMovieDetailTitle"
         android:layout_marginLeft="@dimen/tv_margin_left"
         android:layout_marginTop="4dp"
-        android:text="Release Date:"/>
+        android:text="@string/release_date"/>
 
     <TextView
         android:id="@+id/tvMovieDetailReleaseDate"
@@ -84,7 +84,7 @@
         android:layout_toRightOf="@id/tvReleaseDateString"
         android:layout_toEndOf="@id/tvReleaseDateString"
         android:layout_marginLeft="@dimen/tv_margin_left"
-        android:text="TextView" />
+        tools:text="@string/temp" />
 
     <TextView
         android:id="@+id/tvMovieDetailRatingBar"
@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvMovieDetailTitle"
         android:layout_toRightOf="@id/tvMovieDetailReleaseDate"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="-1dp"
         android:layout_marginLeft="80dp"
         android:textColor="@color/black"
         android:drawableRight="@drawable/star"
@@ -109,6 +109,6 @@
         android:scrollbars="vertical"
         android:layout_marginLeft="@dimen/tv_margin_left"
         android:layout_marginRight="@dimen/tv_margin_right"
-        tools:text="This is the overview of the movie!" />
+        tools:text="@string/temp" />
 
 </RelativeLayout>

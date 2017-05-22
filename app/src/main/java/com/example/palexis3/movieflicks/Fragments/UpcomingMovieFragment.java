@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.palexis3.movieflicks.Adapters.UpcomingMovieRecyclerAdapter;
 import com.example.palexis3.movieflicks.Models.NewMovies;
-import com.example.palexis3.movieflicks.Networking.MovieOkHttpClient;
+import com.example.palexis3.movieflicks.Networking.MyOkHttpClient;
 import com.example.palexis3.movieflicks.R;
 
 import org.json.JSONArray;
@@ -68,7 +68,7 @@ public class UpcomingMovieFragment extends Fragment {
     }
 
     public void fetchMovies() {
-        new MovieCallerTask().execute(",");
+        new MovieCallerTask().execute("Movies");
     }
 
     // an asynctask class to get list of movie items in a background thread
@@ -81,7 +81,7 @@ public class UpcomingMovieFragment extends Fragment {
             String r = "Didn't succeed";
 
             // create an okHttp client to get JSON items
-            MovieOkHttpClient client = new MovieOkHttpClient();
+            MyOkHttpClient client = new MyOkHttpClient();
 
             // getting movies from api call
             try{
@@ -97,7 +97,7 @@ public class UpcomingMovieFragment extends Fragment {
         protected void onPostExecute(String response) {
 
             if(response.equalsIgnoreCase("Didn't succeed")) {
-                Toast.makeText(getActivity(), "Could not get proper movie response in main thread", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Could not get proper movie response in async task", Toast.LENGTH_LONG).show();
             }
 
             newMoviesArrayList = new ArrayList<>();

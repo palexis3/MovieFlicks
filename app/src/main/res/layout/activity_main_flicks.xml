@@ -26,26 +26,5 @@
         android:layout_height="wrap_content">
     </android.support.v4.view.ViewPager>
 
-    <!--
-    <TextView
-        android:id="@+id/tvThisWeek"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:textColor="@color/black"
-        android:textStyle="normal"
-        android:textSize="12sp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="4dp"
-        android:text="@string/upcoming" />
-    
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvMovies"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tvThisWeek"
-        android:layout_marginTop="8dp"
-        android:scrollbars="vertical"/>
-     -->
 
 </RelativeLayout>

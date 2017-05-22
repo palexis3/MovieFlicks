@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.palexis3.movieflicks.Activities.UpcomingMovieDetailActivity;
 import com.example.palexis3.movieflicks.Models.NewMovies;
-import com.example.palexis3.movieflicks.Networking.MovieOkHttpClient;
+import com.example.palexis3.movieflicks.Networking.MyOkHttpClient;
 import com.example.palexis3.movieflicks.R;
 import com.squareup.picasso.Picasso;
 
@@ -24,12 +24,12 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
-public class UpcomingMovieRecyclerAdapter extends RecyclerView.Adapter<UpcomingMovieRecyclerAdapter.MovieViewHolder> {
+public class UpcomingMovieRecyclerAdapter extends RecyclerView.Adapter<UpcomingMovieRecyclerAdapter.ViewHolder> {
 
     private List<NewMovies> movies; // get list of all movies
     private Context context;
 
-    public static class MovieViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         CardView cv;
         ImageView movieImage;
@@ -37,12 +37,12 @@ public class UpcomingMovieRecyclerAdapter extends RecyclerView.Adapter<UpcomingM
         TextView rating;
         TextView info;
 
-        public MovieViewHolder(View view) {
+        public ViewHolder(View view) {
             super(view);
 
             cv = (CardView) view.findViewById(R.id.cv);
-            movieImage = (ImageView) view.findViewById(R.id.ivCardViewMovieImage);
-            title = (TextView) view.findViewById(R.id.tvCardViewMovieTitle);
+            movieImage = (ImageView) view.findViewById(R.id.ivCardViewImage);
+            title = (TextView) view.findViewById(R.id.tvCardViewTitle);
             rating = (TextView) view.findViewById(R.id.tvCardViewRating);
             info = (TextView) view.findViewById(R.id.tvCardViewMoreInfo);
         }
@@ -54,18 +54,19 @@ public class UpcomingMovieRecyclerAdapter extends RecyclerView.Adapter<UpcomingM
         this.context = context;
     }
 
-    // Create new views (invoked by the layout manager)
+    // inflate row layout (cardview_movie_or_show) xml
     @Override
-    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.upcoming_movie_cardview, parent, false);
-        MovieViewHolder mvh = new MovieViewHolder(v);
-        return mvh;
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_movie_or_show, parent, false);
+        ViewHolder vh = new ViewHolder(v);
+
+        return vh;
     }
 
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(MovieViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
         final NewMovies movie = movies.get(position);
 
@@ -107,7 +108,7 @@ public class UpcomingMovieRecyclerAdapter extends RecyclerView.Adapter<UpcomingM
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return movies != null ? movies.size() : 0;
     }
 
     // an async task that gets the youtube key for a movie and then calls the youtube movie details intent
@@ -120,7 +121,7 @@ public class UpcomingMovieRecyclerAdapter extends RecyclerView.Adapter<UpcomingM
             NewMovies movie = null;
 
             // create okhttp client
-            MovieOkHttpClient client = new MovieOkHttpClient();
+            MyOkHttpClient client = new MyOkHttpClient();
             String key;
 
             // getting the key for youtube player for a movie

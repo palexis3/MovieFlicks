@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.palexis3.movieflicks.Activities.PopularTvShowsDetailActivity"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/white_shade">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/detail_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+    
+    
+    <RelativeLayout
+        android:id="@+id/rlTvShowsDetail"
+        android:layout_below="@id/detail_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_tvshow_detail_portrait_height">
+
+        <ImageView
+            android:id="@+id/ivTvShowBackdropImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_tvshow_detail_portrait_height"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:id="@+id/ivPlayIcon"
+            android:layout_width="@dimen/play_icon_width"
+            android:layout_height="@dimen/play_icon_height"
+            app:srcCompat="@drawable/play_icon"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:alpha="0.6" />
+
+    </RelativeLayout>
+    
+    <ImageView
+        android:id="@+id/ivTvShowPosterPathImage"
+        android:layout_width="135dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="-100dp"
+        android:layout_marginRight="2dp"
+        android:layout_below="@id/rlTvShowsDetail"
+        tools:src="@drawable/search_logo"/>
+    
+    <TextView
+        android:id="@+id/tvTvShowDetailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_movie_detail_title_margin_top"
+        android:textColor="@color/colorAccent"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:layout_below="@id/ivTvShowPosterPathImage"
+        tools:text="@string/title"/>
+
+    <TextView
+        android:id="@+id/tvTvShowDetailHomepageUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@id/tvTvShowDetailTitle"
+        tools:text="@string/temp"/>
+
+    <TextView
+        android:id="@+id/tvTvShowDetailLastAirDateString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_below="@id/tvTvShowDetailHomepageUrl"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_margin_top"
+        android:text="@string/last_air_date"/>
+
+    <TextView
+        android:id="@+id/tvTvShowDetailLastAirDate"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTvShowDetailHomepageUrl"
+        android:layout_toRightOf="@id/tvTvShowDetailLastAirDateString"
+        android:layout_toEndOf="@id/tvTvShowDetailLastAirDateString"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_margin_top"
+        tools:text="@string/temp"/>
+
+
+    <TextView
+        android:id="@+id/tvTvShowDetailRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTvShowDetailHomepageUrl"
+        android:layout_toRightOf="@id/tvTvShowDetailLastAirDate"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="60dp"
+        android:textColor="@color/black"
+        android:drawableRight="@drawable/star"
+        android:drawablePadding="4dp"/>
+
+
+    <TextView
+        android:id="@+id/tvTvShowDetailGenreString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTvShowDetailLastAirDateString"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_margin_top"
+        android:text="@string/genre"/>
+
+    <TextView
+        android:id="@+id/tvTvShowDetailGenre"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTvShowDetailLastAirDateString"
+        android:layout_toRightOf="@id/tvTvShowDetailGenreString"
+        android:layout_toEndOf="@id/tvTvShowDetailGenreString"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_margin_top"
+        tools:text="@string/temp"/>
+
+    <TextView
+        android:id="@+id/tvTvShowDetailNetworksString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTvShowDetailGenre"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_margin_top"
+        android:text="@string/networks"/>
+
+    <TextView
+        android:id="@+id/tvTvShowDetailNetworks"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTvShowDetailGenre"
+        android:layout_toRightOf="@id/tvTvShowDetailNetworksString"
+        android:layout_toEndOf="@id/tvTvShowDetailNetworksString"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_margin_top"
+        tools:text="@string/temp"/>
+
+    <TextView
+        android:id="@+id/tvTvShowDetailSeasonsString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTvShowDetailNetworks"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_margin_top"
+        android:text="@string/seasons"/>
+
+    <TextView
+        android:id="@+id/tvTvShowDetailSeasons"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTvShowDetailNetworks"
+        android:layout_toRightOf="@id/tvTvShowDetailSeasonsString"
+        android:layout_toEndOf="@id/tvTvShowDetailSeasonsString"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_margin_top"
+        tools:text="@string/temp"/>
+
+
+    <TextView
+        android:id="@+id/tvTvShowDetailEpisodesString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTvShowDetailNetworks"
+        android:layout_toRightOf="@id/tvTvShowDetailSeasons"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="@dimen/tv_margin_top"
+        android:text="@string/episodes"/>
+
+    <TextView
+        android:id="@+id/tvTvShowDetailEpisodes"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTvShowDetailNetworks"
+        android:layout_toRightOf="@id/tvTvShowDetailEpisodesString"
+        android:layout_toEndOf="@id/tvTvShowDetailEpisodesString"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginTop="@dimen/tv_margin_top"
+        tools:text="@string/temp"/>
+
+
+    <TextView
+        android:id="@+id/tvTvShowDetailOverview"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tv_tvshow_detail_overview_margin_top"
+        android:layout_below="@id/tvTvShowDetailSeasonsString"
+        android:scrollbars="vertical"
+        android:layout_marginLeft="@dimen/tv_margin_left"
+        android:layout_marginRight="@dimen/tv_margin_right"
+        tools:text="@string/temp" />
+
+</RelativeLayout>
