@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.example.palexis3.movieflicks.Fragments.NearbyMovieFragment;
 import com.example.palexis3.movieflicks.Fragments.PopularTvShowsFragment;
 import com.example.palexis3.movieflicks.Fragments.UpcomingMovieFragment;
 import com.example.palexis3.movieflicks.R;
@@ -71,7 +72,7 @@ public class MainFlicksActivity extends AppCompatActivity {
                 case 1:
                     return new PopularTvShowsFragment();
                 case 2:
-                    return new UpcomingMovieFragment();
+                    return new NearbyMovieFragment();
                 default:
                     return null;
             }

@@ -6,18 +6,24 @@ import org.json.JSONObject;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 @Parcel
 public class NearbyMovies {
 
+    private static final String API_KEY = "afygcfx8hkh6mskbu5qrgp53";
+
     String title;
+    String imagePath;
+    String url;
     String releaseDate;
-    String rating;
+    String movieRating;
     List<String> genres;
     String description;
     List<String> cast;
+    List<String> advisories;
     List<Showtimes> showtimesList;
 
     /** Getters */
@@ -25,6 +31,19 @@ public class NearbyMovies {
     public String getTitle() {
         return title;
     }
+
+    public String getUrl() { return url; }
+
+    /** TODO: Must figure out a way to get a movie's image from tms api, if that is too tedious, see if you can get image from querying by name to theMovieDB api*/
+    public String getImagePath() {
+        String res = "N/A";
+        if(!imagePath.equalsIgnoreCase("N/A")) {
+            res = String.format("http://developer.tmsimg.com/%s?api_key=%s", imagePath, API_KEY);
+        }
+        return res;
+    }
+
+    public String getMovieRating() { return movieRating; }
 
     public String getReleaseDate() {
         return releaseDate;
@@ -42,6 +61,8 @@ public class NearbyMovies {
         return cast;
     }
 
+    public List<String> getAdvisories() { return advisories; }
+
     public List<Showtimes> getShowtimesList() {
         return showtimesList;
     }
@@ -52,12 +73,16 @@ public class NearbyMovies {
 
     // default constructor
     public NearbyMovies(JSONObject jsonObject) throws JSONException {
+        this.imagePath = (jsonObject.has("preferredImage")) ? jsonObject.getJSONObject("preferredImage").getString("uri") : "N/A";
+        this.movieRating = (jsonObject.has("ratings")) ? jsonObject.getJSONArray("ratings").getJSONObject(0).getString("code") : "N/A";
+        this.url = (jsonObject.has("officialUrl")) ? jsonObject.getString("officialUrl") : "N/A";
         this.title = jsonObject.getString("title");
-        this.releaseDate = parseDate(jsonObject.getString("releaseDate"));
+        this.releaseDate = (jsonObject.has("releaseDate")) ? parseDate(jsonObject.getString("releaseDate")) : "N/A";
         this.description = jsonObject.getString("longDescription");
         this.showtimesList = Showtimes.fromJSONArray(jsonObject.getJSONArray("showtimes"));
         this.genres = runLoop(jsonObject.getJSONArray("genres"));
-        this.cast = runLoop(jsonObject.getJSONArray("topCast"));
+        this.cast = (jsonObject.has("topCast")) ? runLoop(jsonObject.getJSONArray("topCast")) : new ArrayList<>(Arrays.asList("N/A"));
+        this.advisories = runLoop(jsonObject.getJSONArray("advisories"));
     }
 
     // runLoop takes an json array that purely has strings as items and returns an arraylist of strings
@@ -78,6 +103,7 @@ public class NearbyMovies {
 
     // converting numerical date to string based date
     private static String parseDate(String inputDate) {
+        //if(inputDate == null || inputDate.length() == 0) return "N/A";
 
         HashMap<String, String> map = new HashMap<>();
 

@@ -74,6 +74,9 @@ public class Showtimes {
 
     // convert time into more time friendly time
     private static String parseTime(String inputTime, String quals) {
+
+        if(inputTime == null || inputTime.length() == 0) return "N/A";
+
         String timeOfDay = "PM";
         if(quals != null && quals.equalsIgnoreCase("A.M.")) {
             timeOfDay = "AM";
@@ -94,6 +97,8 @@ public class Showtimes {
 
     // converting numerical date to string based date
     private static String parseDate(String inputDate) {
+
+        if(inputDate == null || inputDate.length() == 0) return "N/A";
 
         HashMap<String, String> map = new HashMap<>();
 

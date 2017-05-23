@@ -3,6 +3,9 @@ package com.example.palexis3.movieflicks.Networking;
 import android.util.Log;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import okhttp3.HttpUrl;
 import okhttp3.Request;
@@ -17,7 +20,7 @@ public class MyOkHttpClient {
     private final static String REGION = "US";
     private final static String LANGUAGE = "en-US";
     private final static String API_KEY = "f1e55cc01616b64d1b66566ca00d707a";
-    private final static String POPULAR_TV_SHOW_URL = "https://api.themoviedb.org/3/tv/popular";
+    private final static String POPULAR_TV_SHOW_URL = "https://api.themoviedb.org/3/tv/on_the_air";
     private final static String TV_SHOW_DETAILS_URL = "https://api.themoviedb.org/3/tv/%s";
     private final static String UPCOMING_MOVIE_URL = "https://api.themoviedb.org/3/movie/upcoming";
     private final static String UPCOMING_MOVIE_VIDEO_URL = "https://api.themoviedb.org/3/movie/%s/videos";
@@ -109,18 +112,29 @@ public class MyOkHttpClient {
         return response.body().string();
     }
 
-  /** TODO: Call the Google Play Location Service api once you're in the NearbyMovies Fragment onCreate method
-      to get the latitude and longitude needed to make the request
-
     // get nearby movies for a user
-    public String getNearbyMovies() throws IOException {
+    public String getNearbyMovies(String latitude, String longitude) throws IOException {
+
         // get the current date
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         String current_date = dateFormat.format(date).toString();
 
-   }
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(NEARBY_MOVIES_URL).newBuilder();
+        urlBuilder.addQueryParameter("startDate", current_date);
+        urlBuilder.addQueryParameter("api_key", TMS_API_KEY);
+        urlBuilder.addQueryParameter("lat", latitude);
+        urlBuilder.addQueryParameter("lng", longitude);
 
-  */
+        String url = urlBuilder.build().toString();
+        Request request = new Request.Builder().url(url).build();
+        Response response = client.newCall(request).execute();
+        if(!response.isSuccessful()) {
+            Log.d("NEARBY MOVIES", "okHttp nearby movies issue!");
+            throw new IOException("Error: nearby movies request issue!");
+        }
+
+        return response.body().string();
+   }
 
 }
