@@ -78,11 +78,17 @@ public class NearbyMovies {
         this.url = (jsonObject.has("officialUrl")) ? jsonObject.getString("officialUrl") : "N/A";
         this.title = jsonObject.getString("title");
         this.releaseDate = (jsonObject.has("releaseDate")) ? parseDate(jsonObject.getString("releaseDate")) : "N/A";
-        this.description = jsonObject.getString("longDescription");
+        if(jsonObject.has("longDescription")) {
+            this.description = jsonObject.getString("longDescription");
+        } else if(jsonObject.has("shortDescription")) {
+            this.description = jsonObject.getString("shortDescription");
+        } else {
+            this.description = "N/A";
+        }
         this.showtimesList = Showtimes.fromJSONArray(jsonObject.getJSONArray("showtimes"));
         this.genres = runLoop(jsonObject.getJSONArray("genres"));
         this.cast = (jsonObject.has("topCast")) ? runLoop(jsonObject.getJSONArray("topCast")) : new ArrayList<>(Arrays.asList("N/A"));
-        this.advisories = runLoop(jsonObject.getJSONArray("advisories"));
+        this.advisories = (jsonObject.has("advisories")) ? runLoop(jsonObject.getJSONArray("advisories")) : new ArrayList<>(Arrays.asList("N/A"));
     }
 
     // runLoop takes an json array that purely has strings as items and returns an arraylist of strings
@@ -103,7 +109,11 @@ public class NearbyMovies {
 
     // converting numerical date to string based date
     private static String parseDate(String inputDate) {
-        //if(inputDate == null || inputDate.length() == 0) return "N/A";
+
+        if(inputDate == null || inputDate.length() == 0) return "N/A";
+
+        String[] arr = inputDate.split("-");
+        if(arr.length != 3) return "N/A";
 
         HashMap<String, String> map = new HashMap<>();
 
@@ -120,8 +130,6 @@ public class NearbyMovies {
         map.put("11", "November");
         map.put("12", "December");
 
-
-        String[] arr = inputDate.split("-");
         String month = arr[1].charAt(0) == '0' ? arr[1].substring(1) : arr[1];
         String res = String.format("%s %s, %s", map.get(month), arr[2], arr[0]);
         return res;
