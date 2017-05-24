@@ -169,8 +169,11 @@ public class NearbyMovieFragment extends Fragment implements GoogleApiClient.Con
             MyOkHttpClient client = new MyOkHttpClient();
 
             // get my latitude and longitude
-            String latitude = params[0][0];
-            String longitude = params[0][1];
+            //String latitude = params[0][0];
+            //String longitude = params[0][1];
+            
+            // hardcode the latitude and longitude
+            String latitude = "37.786073", longitude = "-122.41155";
 
             try {
                 r = client.getNearbyMovies(latitude, longitude);
