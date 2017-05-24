@@ -57,14 +57,17 @@ public class Showtimes {
         // this check is if a showtime has an 'AM' time
         if(jsonObject.has("quals")) {
             this.quals = jsonObject.getString("quals");
+            // getting the specs for a specific showtime
+            String temp_specs = jsonObject.getString("quals");
+            this.specs = new ArrayList<>(Arrays.asList(temp_specs.split("|")));
+        } else {
+            this.quals = "N/A";
+            this.specs = new ArrayList<>(Arrays.asList("N/A"));
         }
 
         this.theaterName = jsonObject.getJSONObject("theatre").getString("name");
-        this.ticketUri = jsonObject.getString("ticketURI");
+        this.ticketUri = (jsonObject.has("ticketURI")) ? jsonObject.getString("ticketURI") : "N/A";
 
-        // getting the specs for a specific showtime
-        String temp_specs = jsonObject.getString("quals");
-        this.specs = new ArrayList<>(Arrays.asList(temp_specs.split("|")));
 
         // getting date and times for a showtimes
         String[] dateTimeArr = jsonObject.getString("dateTime").split("T");
@@ -100,6 +103,9 @@ public class Showtimes {
 
         if(inputDate == null || inputDate.length() == 0) return "N/A";
 
+        String[] arr = inputDate.split("-");
+        if(arr.length != 3) return "N/A";
+
         HashMap<String, String> map = new HashMap<>();
 
         map.put("1", "January");
@@ -116,7 +122,6 @@ public class Showtimes {
         map.put("12", "December");
 
 
-        String[] arr = inputDate.split("-");
         String month = arr[1].charAt(0) == '0' ? arr[1].substring(1) : arr[1];
         String res = String.format("%s %s, %s", map.get(month), arr[2], arr[0]);
         return res;
