@@ -110,6 +110,7 @@ public class PopularTvShowsDetailActivity extends AppCompatActivity {
 
     // converts a list to string
     private static String convertToString(List<String> list) {
+
         if(list == null || list.size() == 0) return "N/A";
 
         StringBuilder sb = new StringBuilder();

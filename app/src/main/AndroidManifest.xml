@@ -31,6 +31,8 @@
 
         <activity android:name=".Activities.PopularTvShowsDetailActivity"></activity>
 
+        <activity android:name=".Activities.NearbyMovieDetailActivity"></activity>
+
    </application>
 
 </manifest>

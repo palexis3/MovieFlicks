@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cvShowtime"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="@color/white_shade">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvShowtimeTheater"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="6dp"
+            android:textColor="@color/colorAccent"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:text="@string/title"/>
+
+        <TextView
+            android:id="@+id/tvShowtimeDateString"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_below="@id/tvShowtimeTheater"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="6dp"
+            android:text="@string/date"/>
+
+        <TextView
+            android:id="@+id/tvShowtimeDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvShowtimeTheater"
+            android:layout_toRightOf="@id/tvShowtimeDateString"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="6dp"
+            android:text="@string/temp"/>
+
+
+        <TextView
+            android:id="@+id/tvShowtimeSpecsString"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvShowtimeDate"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="2dp"
+            android:text="@string/specs"/>
+
+        <TextView
+            android:id="@+id/tvShowtimeSpecs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvShowtimeDate"
+            android:layout_toRightOf="@id/tvShowtimeSpecsString"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="2dp"
+            android:text="@string/temp"/>
+
+        <TextView
+            android:id="@+id/tvShowtimeTicketUriString"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="2dp"
+            android:text="@string/tickets"
+            android:layout_below="@id/tvShowtimeSpecs"/>
+
+        <TextView
+            android:id="@+id/tvShowtimeTicketUri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="2dp"
+            android:text="@string/temp"
+            android:layout_toRightOf="@id/tvShowtimeTicketUriString"
+            android:layout_below="@id/tvShowtimeSpecs"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

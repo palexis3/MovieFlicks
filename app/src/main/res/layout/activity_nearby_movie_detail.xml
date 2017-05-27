@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.palexis3.movieflicks.Activities.NearbyMovieDetailActivity"
+    android:background="@color/white"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/detail_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+
+    <!-- Cardview holds general nearby movie information -->
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cvNearByMovie"
+        android:layout_below="@id/detail_toolbar"
+        android:orientation="vertical"
+        android:elevation="4dp"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@color/white_shade">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/ivCardViewNearbyMovieImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"/>
+
+
+            <TextView
+                android:id="@+id/tvCardViewNearbyMovieTitle"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivCardViewNearbyMovieImage"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorAccent"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="6dp"
+                android:text="@string/title"/>
+
+            <TextView
+                android:id="@+id/tvCardViewMovieRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivCardViewNearbyMovieImage"
+                android:layout_toRightOf="@id/tvCardViewNearbyMovieTitle"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="6dp"
+                android:text="@string/temp"/>
+
+
+            <TextView
+                android:id="@+id/tvCardViewUrl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCardViewNearbyMovieTitle"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="6dp"
+                android:text="@string/temp"/>
+
+            <TextView
+                android:id="@+id/tvCardViewMovieReleaseDateString"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCardViewUrl"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/release_date"/>
+
+            <TextView
+                android:id="@+id/tvCardViewNearbyMovieReleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCardViewUrl"
+                android:layout_toRightOf="@id/tvCardViewMovieReleaseDateString"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/temp"/>
+
+
+            <TextView
+                android:id="@+id/tvCardViewNearbyMovieCastString"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_below="@id/tvCardViewNearbyMovieReleaseDate"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/cast"/>
+
+
+            <TextView
+                android:id="@+id/tvCardViewNearbyMovieCast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCardViewNearbyMovieReleaseDate"
+                android:layout_toRightOf="@id/tvCardViewNearbyMovieCastString"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/temp"/>
+
+
+            <TextView
+                android:id="@+id/tvCardViewNearbyMovieGenreString"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCardViewNearbyMovieCast"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/genre"/>
+
+            <TextView
+                android:id="@+id/tvCardViewNearbyMovieGenre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCardViewNearbyMovieCast"
+                android:layout_toRightOf="@id/tvCardViewNearbyMovieGenreString"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/temp"/>
+
+
+            <TextView
+                android:id="@+id/tvCardViewNearbyMovieDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCardViewNearbyMovieGenre"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/temp"
+                android:minLines="1"
+                android:maxLines="5"
+                android:scrollbars="vertical"/>
+
+            <Button
+                android:id="@+id/buttonNearbyMovie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCardViewNearbyMovieDescription"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="6dp"
+                android:text="@string/showtimes"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

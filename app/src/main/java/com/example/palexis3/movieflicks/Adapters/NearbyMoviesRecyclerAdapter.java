@@ -2,6 +2,7 @@ package com.example.palexis3.movieflicks.Adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,11 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.palexis3.movieflicks.Activities.NearbyMovieDetailActivity;
 import com.example.palexis3.movieflicks.Models.NearbyMovies;
 import com.example.palexis3.movieflicks.R;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -42,6 +45,7 @@ public class NearbyMoviesRecyclerAdapter extends RecyclerView.Adapter<NearbyMovi
         TextView rating;
 
         public ViewHolder(View view) {
+
             super(view);
 
             cardView = (CardView) view.findViewById(R.id.cv);
@@ -69,6 +73,7 @@ public class NearbyMoviesRecyclerAdapter extends RecyclerView.Adapter<NearbyMovi
         return nearbyMoviesArrayList != null ? nearbyMoviesArrayList.size() : 0;
     }
 
+    // bind items in xml to nearby movies model attributes
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
@@ -80,10 +85,21 @@ public class NearbyMoviesRecyclerAdapter extends RecyclerView.Adapter<NearbyMovi
 
         // set the movie rating (PG-13, R, etc)
         TextView rating = holder.rating;
-        rating.setText(movie.getMovieRating());
+        if(movie.getMovieRating().equals("N/A")) {
+            rating.setText(movie.getMovieRating());
+        } else {
+            rating.setText(String.format("Rated: %s", movie.getMovieRating()));
+        }
+
 
         TextView showtimes = holder.showtimes;
-        String res = String.format("%d show times near you", movie.getShowtimesList().size());
+        // processing plural and singular form of time
+        String timeCase = "times";
+        if(movie.getShowtimesList().size() == 1) {
+            timeCase = "time";
+        }
+
+        String res = String.format("%d show %s near you", movie.getShowtimesList().size(), timeCase);
         showtimes.setText(res);
 
         ImageView image = holder.movieImage;
@@ -101,7 +117,11 @@ public class NearbyMoviesRecyclerAdapter extends RecyclerView.Adapter<NearbyMovi
         moreInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Get the nearby movies detail activity", Toast.LENGTH_LONG).show();
+               // call intent to launch nearby movie details activity
+                Intent i = new Intent(context, NearbyMovieDetailActivity.class);
+                i.putExtra("movie", Parcels.wrap(movie));
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
             }
         });
     }

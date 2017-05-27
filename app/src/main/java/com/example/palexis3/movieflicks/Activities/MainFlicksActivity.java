@@ -9,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.palexis3.movieflicks.Fragments.NearbyMovieFragment;
-import com.example.palexis3.movieflicks.Fragments.PopularTvShowsFragment;
-import com.example.palexis3.movieflicks.Fragments.UpcomingMovieFragment;
 import com.example.palexis3.movieflicks.R;
 
 import butterknife.BindView;
@@ -53,7 +51,7 @@ public class MainFlicksActivity extends AppCompatActivity {
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
 
-        private static int NUM_OF_PAGES = 3;
+        private static int NUM_OF_PAGES = 1;
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -68,6 +66,17 @@ public class MainFlicksActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
+                    return new NearbyMovieFragment();
+                default:
+                    return new NearbyMovieFragment();
+            }
+        }
+
+        /**
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
                     return new UpcomingMovieFragment();
                 case 1:
                     return new PopularTvShowsFragment();
@@ -77,6 +86,7 @@ public class MainFlicksActivity extends AppCompatActivity {
                     return null;
             }
         }
+       */
     }
 
 

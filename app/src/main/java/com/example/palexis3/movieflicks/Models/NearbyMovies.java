@@ -73,6 +73,7 @@ public class NearbyMovies {
 
     // default constructor
     public NearbyMovies(JSONObject jsonObject) throws JSONException {
+
         this.imagePath = (jsonObject.has("preferredImage")) ? jsonObject.getJSONObject("preferredImage").getString("uri") : "N/A";
         this.movieRating = (jsonObject.has("ratings")) ? jsonObject.getJSONArray("ratings").getJSONObject(0).getString("code") : "N/A";
         this.url = (jsonObject.has("officialUrl")) ? jsonObject.getString("officialUrl") : "N/A";

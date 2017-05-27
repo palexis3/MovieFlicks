@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Activities.MainFlicksActivity"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
     android:id="@+id/cv"
     android:orientation="vertical"
     android:elevation="4dp"
@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/ivCardViewImage"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="200dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"/>
 
@@ -47,7 +47,7 @@
 
         <TextView
             android:id="@+id/tvCardViewMoreInfo"
-            android:layout_width="270dp"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:layout_marginLeft="4dp"
@@ -63,11 +63,9 @@
             android:layout_below="@id/tvCardViewNumberOfShowtimes"
             android:layout_toRightOf="@id/tvCardViewMoreInfo"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
             android:textColor="@color/black"
             tools:text="@string/temp"/>
 
     </RelativeLayout>
-
 
 </android.support.v7.widget.CardView>

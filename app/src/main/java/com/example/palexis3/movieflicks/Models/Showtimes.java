@@ -25,6 +25,7 @@ public class Showtimes {
     List<String> specs;
     String ticketUri;
 
+
     /** Getters */
     public List<String> getSpecs() {
         return specs;

@@ -1,15 +1,11 @@
 package com.example.palexis3.movieflicks.Fragments;
 
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,9 +18,7 @@ import com.example.palexis3.movieflicks.Adapters.NearbyMoviesRecyclerAdapter;
 import com.example.palexis3.movieflicks.Models.NearbyMovies;
 import com.example.palexis3.movieflicks.Networking.MyOkHttpClient;
 import com.example.palexis3.movieflicks.R;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +27,9 @@ import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 
-public class NearbyMovieFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+// implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
+
+public class NearbyMovieFragment extends Fragment {
 
     private final static String TAG = "NearbyMovieFragment";
     private final static int REQUEST_LOCATION = 1;
@@ -48,6 +44,7 @@ public class NearbyMovieFragment extends Fragment implements GoogleApiClient.Con
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+       /**
         // create the google client to start receiving updates
         if(googleApiClient == null) {
             googleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -55,18 +52,9 @@ public class NearbyMovieFragment extends Fragment implements GoogleApiClient.Con
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this).build();
         }
+       */
     }
 
-    // callback given by the Google Play services API
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(getActivity(), "Google api client failed to connect", Toast.LENGTH_LONG).show();
-    }
-
-    // callback given by the Google Play services API
-    @Override
-    public void onConnectionSuspended(int i) {
-    }
 
     // inflate fragment xml
     @Nullable
@@ -87,7 +75,24 @@ public class NearbyMovieFragment extends Fragment implements GoogleApiClient.Con
 
         // set up vertical linear manager
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        // call nearby movie caller task
+        fetchNearbyMovies();
     }
+
+  /**
+
+
+   // callback given by the Google Play services API
+   @Override
+   public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+   Toast.makeText(getActivity(), "Google api client failed to connect", Toast.LENGTH_LONG).show();
+   }
+
+   // callback given by the Google Play services API
+   @Override
+   public void onConnectionSuspended(int i) {
+   }
 
     @Override
     public void onStart() {
@@ -128,8 +133,6 @@ public class NearbyMovieFragment extends Fragment implements GoogleApiClient.Con
             if (location != null) {
                 String latitude = String.valueOf(location.getLatitude());
                 String longitude = String.valueOf(location.getLongitude());
-                // call nearby movie caller task
-                fetchNearbyMovies(latitude, longitude);
             } else {
                 Toast.makeText(getActivity(), "Error: Could not get your current location!", Toast.LENGTH_LONG).show();
             }
@@ -154,14 +157,17 @@ public class NearbyMovieFragment extends Fragment implements GoogleApiClient.Con
             }
         }
     }
+  */
 
     // call our nearby movie caller async task
-    public void fetchNearbyMovies(String latitude, String longitude) { new NearbyMovieCallerTask().execute(new String[]{latitude, longitude}); }
+    //public void fetchNearbyMovies(String latitude, String longitude) { new NearbyMovieCallerTask().execute(new String[]{latitude, longitude}); }
 
-    private class NearbyMovieCallerTask extends AsyncTask<String[], Void, String> {
+    public void fetchNearbyMovies() { new NearbyMovieCallerTask().execute(); }
+
+    private class NearbyMovieCallerTask extends AsyncTask<Void, Void, String> {
 
         @Override
-        protected String doInBackground(String[]... params) {
+        protected String doInBackground(Void... params) {
 
             String r = "Didn't succeed";
 
@@ -171,7 +177,7 @@ public class NearbyMovieFragment extends Fragment implements GoogleApiClient.Con
             // get my latitude and longitude
             //String latitude = params[0][0];
             //String longitude = params[0][1];
-            
+
             // hardcode the latitude and longitude
             String latitude = "37.786073", longitude = "-122.41155";
 
@@ -186,9 +192,6 @@ public class NearbyMovieFragment extends Fragment implements GoogleApiClient.Con
 
         @Override
         protected void onPostExecute(String response) {
-
-            // Used for debugging!
-            android.os.Debug.waitForDebugger();
 
             if(response.equalsIgnoreCase("Didn't succeed")) {
                 Toast.makeText(getActivity(), "Could not get nearby movies response in async task", Toast.LENGTH_LONG).show();

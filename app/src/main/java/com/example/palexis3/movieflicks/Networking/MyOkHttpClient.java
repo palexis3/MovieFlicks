@@ -8,10 +8,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class MyOkHttpClient {
+
+    // used for logging (debugging)
+    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
 
     private okhttp3.OkHttpClient client;
 
@@ -32,7 +37,7 @@ public class MyOkHttpClient {
     private final static String NEARBY_MOVIES_URL = "http://data.tmsapi.com/v1.1/movies/showings";
 
     public MyOkHttpClient() {
-        this.client = new okhttp3.OkHttpClient();
+        this.client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
     }
 
     // get upcoming movies synchronously from movies api
@@ -135,6 +140,6 @@ public class MyOkHttpClient {
         }
 
         return response.body().string();
-   }
+    }
 
 }

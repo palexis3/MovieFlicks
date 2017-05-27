@@ -43,7 +43,6 @@
             android:layout_centerVertical="true"
             android:scaleType="fitXY"
             android:alpha="0.6" />
-
     </RelativeLayout>
     
     <ImageView
