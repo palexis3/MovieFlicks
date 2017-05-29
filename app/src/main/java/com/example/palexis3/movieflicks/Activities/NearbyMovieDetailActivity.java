@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.palexis3.movieflicks.Fragments.ShowTimesDialogFragment;
 import com.example.palexis3.movieflicks.Models.NearbyMovies;
 import com.example.palexis3.movieflicks.R;
 import com.example.palexis3.movieflicks.Utilities;
@@ -64,10 +64,8 @@ public class NearbyMovieDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // construct a dialog fragment that shows a listview of showtimes
-                /** TODO: Create ShowTimesDialogFragment and pass in the showtimes list as an argument */
-                //Bundle bundle = new Bundle();
-                //bundle.putParcelableArrayList("showtimes", movie.getShowtimesList());
-                Toast.makeText(getApplicationContext(), "Now get the showtimes!", Toast.LENGTH_LONG).show();
+                ShowTimesDialogFragment fragment = ShowTimesDialogFragment.newInstance(movie.getShowtimesList(), movie.getTitle());
+                fragment.show(getSupportFragmentManager(), "Showtime");
             }
         });
 

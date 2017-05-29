@@ -60,7 +60,7 @@ public class Showtimes {
             this.quals = jsonObject.getString("quals");
             // getting the specs for a specific showtime
             String temp_specs = jsonObject.getString("quals");
-            this.specs = new ArrayList<>(Arrays.asList(temp_specs.split("|")));
+            this.specs = new ArrayList<>(Arrays.asList(temp_specs.split("\\|")));
         } else {
             this.quals = "N/A";
             this.specs = new ArrayList<>(Arrays.asList("N/A"));
@@ -95,7 +95,13 @@ public class Showtimes {
             hours -= 12;
         }
 
-        String res = String.format("%d:%d %s", hours, minutes, timeOfDay);
+        // case when minutes is just 0 and needs to be 00 for time
+        String min = String.valueOf(minutes);
+        if(minutes == 0) {
+            min += "0";
+        }
+
+        String res = String.format("%d:%s %s", hours, min, timeOfDay);
         return res;
     }
 

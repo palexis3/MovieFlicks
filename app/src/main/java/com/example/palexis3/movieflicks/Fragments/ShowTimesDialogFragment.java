@@ -14,30 +14,56 @@ import com.example.palexis3.movieflicks.Adapters.ShowtimesRecyclerAdapter;
 import com.example.palexis3.movieflicks.Models.Showtimes;
 import com.example.palexis3.movieflicks.R;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 
-
-/** TODO: Get the showtime arraylist from the nearby movie detail activity through bundle checkout Parcelable, Parcels, Serializeable */
 
 public class ShowTimesDialogFragment extends DialogFragment{
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private ArrayList<Showtimes> showtimesArrayList;
-
-    public ShowTimesDialogFragment(){}; // empty constructor
+    private String title;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        // getting the show time arraylist passed in
+        showtimesArrayList = Parcels.unwrap(getArguments().getParcelable("showtimes"));
+
+        // get the title
+        title = getArguments().getString("title");
+    }
+
+    public ShowTimesDialogFragment(){} // empty constructor
+
+
+    public static ShowTimesDialogFragment newInstance(ArrayList<Showtimes> showtimesArrayList, String title) {
+
+        ShowTimesDialogFragment frag = new ShowTimesDialogFragment();
+
+        // supply showtime list as bundle argument
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("showtimes", Parcels.wrap(showtimesArrayList));
+        bundle.putString("title", title);
+        frag.setArguments(bundle);
+
+        return frag;
     }
 
     // inflate the xml for this layout
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        // setting the title for this dialog
+        getDialog().setTitle(title);
+
         View v = inflater.inflate(R.layout.fragment_showtime_list, container, false);
         return v;
     }

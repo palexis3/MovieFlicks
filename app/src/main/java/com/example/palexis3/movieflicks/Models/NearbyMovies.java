@@ -24,7 +24,7 @@ public class NearbyMovies {
     String description;
     List<String> cast;
     List<String> advisories;
-    List<Showtimes> showtimesList;
+    ArrayList<Showtimes> showtimesList;
 
     /** Getters */
 
@@ -63,7 +63,7 @@ public class NearbyMovies {
 
     public List<String> getAdvisories() { return advisories; }
 
-    public List<Showtimes> getShowtimesList() {
+    public ArrayList<Showtimes> getShowtimesList() {
         return showtimesList;
     }
 

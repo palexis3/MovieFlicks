@@ -15,26 +15,16 @@
             android:layout_marginTop="2dp"
             android:layout_marginLeft="6dp"
             android:textColor="@color/colorAccent"
+            android:textSize="20sp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:text="@string/title"/>
 
-        <TextView
-            android:id="@+id/tvShowtimeDateString"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_below="@id/tvShowtimeTheater"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="6dp"
-            android:text="@string/date"/>
 
         <TextView
             android:id="@+id/tvShowtimeDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvShowtimeTheater"
-            android:layout_toRightOf="@id/tvShowtimeDateString"
             android:layout_marginTop="2dp"
             android:layout_marginLeft="6dp"
             android:text="@string/temp"/>
@@ -58,6 +48,7 @@
             android:layout_below="@id/tvShowtimeDate"
             android:layout_toRightOf="@id/tvShowtimeSpecsString"
             android:layout_marginLeft="6dp"
+            android:layout_marginRight="2dp"
             android:layout_marginTop="2dp"
             android:text="@string/temp"/>
 
@@ -74,10 +65,12 @@
 
         <TextView
             android:id="@+id/tvShowtimeTicketUri"
+            android:textColor="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
             android:layout_marginTop="2dp"
+            android:layout_marginRight="2dp"
             android:text="@string/temp"
             android:layout_toRightOf="@id/tvShowtimeTicketUriString"
             android:layout_below="@id/tvShowtimeSpecs"/>
