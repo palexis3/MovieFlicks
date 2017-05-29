@@ -52,16 +52,6 @@
                 android:layout_marginLeft="6dp"
                 android:text="@string/title"/>
 
-            <TextView
-                android:id="@+id/tvCardViewMovieRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ivCardViewNearbyMovieImage"
-                android:layout_toRightOf="@id/tvCardViewNearbyMovieTitle"
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="6dp"
-                android:text="@string/temp"/>
-
 
             <TextView
                 android:id="@+id/tvCardViewUrl"
@@ -69,15 +59,27 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvCardViewNearbyMovieTitle"
                 android:textColor="@color/colorPrimary"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="6dp"
                 android:text="@string/temp"/>
+
+            <TextView
+                android:id="@+id/tvCardViewMovieRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_below="@id/tvCardViewUrl"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="6dp"
+                android:text="@string/temp"/>
+
 
             <TextView
                 android:id="@+id/tvCardViewMovieReleaseDateString"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvCardViewUrl"
+                android:layout_below="@id/tvCardViewMovieRating"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginLeft="6dp"
@@ -88,7 +90,7 @@
                 android:id="@+id/tvCardViewNearbyMovieReleaseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvCardViewUrl"
+                android:layout_below="@id/tvCardViewMovieRating"
                 android:layout_toRightOf="@id/tvCardViewMovieReleaseDateString"
                 android:layout_marginLeft="6dp"
                 android:layout_marginTop="3dp"

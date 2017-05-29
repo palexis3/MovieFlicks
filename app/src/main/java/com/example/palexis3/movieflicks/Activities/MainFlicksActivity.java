@@ -1,6 +1,7 @@
 package com.example.palexis3.movieflicks.Activities;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -9,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.palexis3.movieflicks.Fragments.NearbyMovieFragment;
+import com.example.palexis3.movieflicks.Fragments.PopularTvShowsFragment;
+import com.example.palexis3.movieflicks.Fragments.UpcomingMovieFragment;
 import com.example.palexis3.movieflicks.R;
 
 import butterknife.BindView;
@@ -16,13 +19,10 @@ import butterknife.ButterKnife;
 
 public class MainFlicksActivity extends AppCompatActivity {
 
-    //private RecyclerView mRecyclerView;
-    //private RecyclerView.Adapter recyclerAdapter;
     FragmentPagerAdapter adapterViewPager;
 
     // instantiating views
     @BindView(R.id.toolbar) Toolbar toolbar;
-   // @BindView(R.id.tvThisWeek) TextView tvTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,24 +34,21 @@ public class MainFlicksActivity extends AppCompatActivity {
         // setting the toolbar
         setSupportActionBar(toolbar);
 
+        // get the Viewpager and set it's PagerAdapter so it can display it's items
         ViewPager viewPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapterViewPager);
 
-     /*
-        mRecyclerView = (RecyclerView) findViewById(R.id.rvMovies);
-
-        // set up vertical linear layout
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-        // call movie caller async task
-        fetchMovies();
-      */
+        // give the tablayout the viewpager
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
 
-        private static int NUM_OF_PAGES = 1;
+        private static int NUM_OF_PAGES = 3;
+        private static String[] tabTitles = new String[]{"New Movies", "Tv Shows", "Nearby Movies"};
+
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -66,17 +63,6 @@ public class MainFlicksActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new NearbyMovieFragment();
-                default:
-                    return new NearbyMovieFragment();
-            }
-        }
-
-        /**
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
                     return new UpcomingMovieFragment();
                 case 1:
                     return new PopularTvShowsFragment();
@@ -86,15 +72,13 @@ public class MainFlicksActivity extends AppCompatActivity {
                     return null;
             }
         }
-       */
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+        }
     }
 
-
-    /*
-    public void fetchMovies() {
-        new MovieCallerTask().execute(",");
-    }
-    */
 
    /** TODO: Searching functionality, don't know how to populate this view once a search comes in */
 
