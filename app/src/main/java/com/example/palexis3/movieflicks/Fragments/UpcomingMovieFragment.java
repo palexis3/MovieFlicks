@@ -110,7 +110,7 @@ public class UpcomingMovieFragment extends Fragment {
                 newMoviesArrayList.addAll(NewMovies.fromJSONArray(movieJSONResults));
             } catch(JSONException e) {
                 Log.d("OKHTTP-DEBUG", e.toString());
-                Toast.makeText(getActivity(), "Error: Json parsing exception", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Cannot get upcoming movies at this time!", Toast.LENGTH_LONG).show();
             }
 
             // add movie list to recycler view adapter

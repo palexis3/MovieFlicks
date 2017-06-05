@@ -4,8 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!--
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    -->
 
     <application
         android:allowBackup="true"
@@ -14,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Activities.MainFlicksActivity">
+        <activity android:name=".Activities.MainFlicksActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,13 +28,17 @@
                 android:resource="@xml/searchable" />
         </activity>
 
-        <activity android:name=".Activities.UpcomingMovieDetailActivity"></activity>
+        <activity android:name=".Activities.UpcomingMovieDetailActivity"
+            android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".Activities.QuickPlayActivity"></activity>
+        <activity android:name=".Activities.QuickPlayActivity"
+            android:screenOrientation="landscape"></activity>
 
-        <activity android:name=".Activities.PopularTvShowsDetailActivity"></activity>
+        <activity android:name=".Activities.PopularTvShowsDetailActivity"
+            android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".Activities.NearbyMovieDetailActivity"></activity>
+        <activity android:name=".Activities.NearbyMovieDetailActivity"
+            android:screenOrientation="portrait"></activity>
 
    </application>
 

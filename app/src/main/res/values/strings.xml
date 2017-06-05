@@ -17,4 +17,7 @@
     <string name="date">Date:</string>
     <string name="tickets">Tickets:</string>
     <string name="specs">Specifics:</string>
+    <string name="title_location_permission">Need Location</string>
+    <string name="text_location_permission">App needs your current location to get nearby movies</string>
+    <string name="ok">Ok</string>
 </resources>

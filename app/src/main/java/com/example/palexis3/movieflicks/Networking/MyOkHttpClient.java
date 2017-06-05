@@ -18,7 +18,8 @@ public class MyOkHttpClient {
     // used for logging (debugging)
     HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
 
-    private okhttp3.OkHttpClient client;
+    // create only one instance of okHttp client for performance
+    private static okhttp3.OkHttpClient client;
 
     /** Upcoming movies and popular tv shows implementation leverages the api.theMoviedb.org endpoints */
 

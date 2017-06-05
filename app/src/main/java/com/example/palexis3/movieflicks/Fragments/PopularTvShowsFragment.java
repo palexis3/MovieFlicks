@@ -106,7 +106,7 @@ public class PopularTvShowsFragment extends Fragment{
                 tvShowsArrayList.addAll(TvShows.fromJSONArray(tvShowJsonResults));
             } catch (JSONException e) {
                 Log.d("OKHTTP-ERROR", e.toString());
-                Toast.makeText(getActivity(), "Error: JSON PARSING EXCEPTION IN POPULAR MOVIES ASYNC TASK", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Cannot get popular tv shows at this time!", Toast.LENGTH_LONG).show();
             }
 
             // add tv shows arraylist to recycler adapter

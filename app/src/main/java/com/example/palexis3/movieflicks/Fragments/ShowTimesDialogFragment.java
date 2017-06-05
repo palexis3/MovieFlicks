@@ -4,6 +4,7 @@ package com.example.palexis3.movieflicks.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ public class ShowTimesDialogFragment extends DialogFragment{
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private ArrayList<Showtimes> showtimesArrayList;
+    private RecyclerView.ItemDecoration itemDecoration;
     private String title;
 
     @Override
@@ -77,6 +79,10 @@ public class ShowTimesDialogFragment extends DialogFragment{
 
         // set up vertical layout manager
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        // add item decoration
+        itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(itemDecoration);
 
         // add showtimes to recycler view
         adapter = new ShowtimesRecyclerAdapter(getActivity(), showtimesArrayList);

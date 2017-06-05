@@ -1,11 +1,15 @@
 package com.example.palexis3.movieflicks.Fragments;
 
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,7 +22,9 @@ import com.example.palexis3.movieflicks.Adapters.NearbyMoviesRecyclerAdapter;
 import com.example.palexis3.movieflicks.Models.NearbyMovies;
 import com.example.palexis3.movieflicks.Networking.MyOkHttpClient;
 import com.example.palexis3.movieflicks.R;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +35,7 @@ import butterknife.ButterKnife;
 
 // implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
 
-public class NearbyMovieFragment extends Fragment {
+public class NearbyMovieFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private final static String TAG = "NearbyMovieFragment";
     private final static int REQUEST_LOCATION = 1;
@@ -44,7 +50,6 @@ public class NearbyMovieFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       /**
         // create the google client to start receiving updates
         if(googleApiClient == null) {
             googleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -52,9 +57,7 @@ public class NearbyMovieFragment extends Fragment {
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this).build();
         }
-       */
     }
-
 
     // inflate fragment xml
     @Nullable
@@ -69,6 +72,7 @@ public class NearbyMovieFragment extends Fragment {
     // bind views within fragment xml
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
         ButterKnife.bind(getActivity());
 
         recyclerView = (RecyclerView) view.findViewById(R.id.rvNearbyMovies);
@@ -76,17 +80,21 @@ public class NearbyMovieFragment extends Fragment {
         // set up vertical linear manager
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
+        /*
+        // check location permissions
+        checkPermissions();
+
         // call nearby movie caller task
         fetchNearbyMovies();
+        */
     }
-
-  /**
 
 
    // callback given by the Google Play services API
    @Override
    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-   Toast.makeText(getActivity(), "Google api client failed to connect", Toast.LENGTH_LONG).show();
+       Toast.makeText(getActivity(), "Google api client failed to connect", Toast.LENGTH_LONG).show();
+       googleApiClient.disconnect();
    }
 
    // callback given by the Google Play services API
@@ -100,6 +108,12 @@ public class NearbyMovieFragment extends Fragment {
 
         // connect the google api client
         googleApiClient.connect();
+
+        // check location permissions
+        checkPermissions();
+
+        // call nearby movie caller task
+        fetchNearbyMovies();
     }
 
     @Override
@@ -116,12 +130,28 @@ public class NearbyMovieFragment extends Fragment {
         super.onStop();
     }
 
+    // this method checks the location permissions given by the Google play services
+    // and updates the fragment's location object
+    public void checkPermissions() {
+
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Check Permissions Now
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_LOCATION);
+        } else {
+            // permission has been granted, continue as usual
+            location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+        }
+    }
+
+
     // callback given by the Google Play services API
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
         // must check permissions first
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // Check Permissions Now (Async)
             // This will show the standard permission request dialog UI
@@ -130,12 +160,14 @@ public class NearbyMovieFragment extends Fragment {
         } else {
             // get latitude and longitude from Google Play services api
             location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+            /*
             if (location != null) {
                 String latitude = String.valueOf(location.getLatitude());
                 String longitude = String.valueOf(location.getLongitude());
             } else {
                 Toast.makeText(getActivity(), "Error: Could not get your current location!", Toast.LENGTH_LONG).show();
             }
+            */
         }
     }
 
@@ -143,21 +175,22 @@ public class NearbyMovieFragment extends Fragment {
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions,
                                            int[] grantResults) {
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
         if (requestCode == REQUEST_LOCATION) {
             if(grantResults.length == 1
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && ContextCompat.checkSelfPermission(getContext(),
+                    Manifest.permission. ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+
                 // We can now safely use the API we requested access to
-                Toast.makeText(getActivity(), "Success! Got your location!", Toast.LENGTH_LONG).show();
+                location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
             } else {
                 // Permission was denied or request was cancelled
-                Toast.makeText(getActivity(), "Error: Could not get permission for Location!", Toast.LENGTH_LONG).show();
+                Log.d("LOCATION", "Wasn't able to get current location");
             }
         }
     }
-  */
+
 
     // call our nearby movie caller async task
     //public void fetchNearbyMovies(String latitude, String longitude) { new NearbyMovieCallerTask().execute(new String[]{latitude, longitude}); }
@@ -165,6 +198,8 @@ public class NearbyMovieFragment extends Fragment {
     public void fetchNearbyMovies() { new NearbyMovieCallerTask().execute(); }
 
     private class NearbyMovieCallerTask extends AsyncTask<Void, Void, String> {
+
+        /** TODO: TRY TO SEE IF PLACING LOCATION APP PERMISSIONS CODE IN ASYNC TASAK WILL STOP THE APP FROM CRASHING */
 
         @Override
         protected String doInBackground(Void... params) {
@@ -179,7 +214,10 @@ public class NearbyMovieFragment extends Fragment {
             //String longitude = params[0][1];
 
             // hardcode the latitude and longitude
-            String latitude = "37.786073", longitude = "-122.41155";
+            //String latitude = "37.786073", longitude = "-122.41155";
+            //String latitude = "26.1664736", longitude = "-80.2083806";
+
+            String latitude = String.valueOf(location.getLatitude()), longitude = String.valueOf(location.getLongitude());
 
             try {
                 r = client.getNearbyMovies(latitude, longitude);
@@ -202,13 +240,12 @@ public class NearbyMovieFragment extends Fragment {
 
             try{
                 jsonArray = new JSONArray(response);
-
                 // add all nearby movies from api call
                 nearbyMoviesArrayList.addAll(NearbyMovies.fromJSONArray(jsonArray));
 
             } catch (JSONException e) {
                 Log.d("OKHTTP-ERROR", e.toString());
-                Toast.makeText(getActivity(), "Error: JSON PARSING EXCEPTION IN NEARBY MOVIES ASYNC TASK", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Cannot get nearby movies at this time!", Toast.LENGTH_LONG).show();
             }
 
             // add nearby movies to recycler adapter
@@ -216,7 +253,6 @@ public class NearbyMovieFragment extends Fragment {
 
             // set the adapter for the recyclerview
             recyclerView.setAdapter(recyclerAdapter);
-
         }
     }
 }
